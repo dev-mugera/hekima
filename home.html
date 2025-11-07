@@ -5,8 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hekima Hub - Private Tutoring Excellence</title>
     <link rel="icon" type="image/x-icon" href="https://i.postimg.cc/BbqKHJvt/Whats-App-Image-2025-11-07-at-12-10-58-removebg-preview.png">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#1a73e8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Hekima Hub">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="msapplication-TileColor" content="#1a73e8">
+    <meta name="msapplication-tap-highlight" content="no">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         /* Global Styles */
         :root {
@@ -39,6 +50,7 @@
             line-height: 1.5;
             overflow-x: hidden;
             font-family: 'Roboto', sans-serif;
+            -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape */
         }
         
         .container {
@@ -61,6 +73,7 @@
             font-size: 0.95rem;
             transition: all 0.3s ease;
             font-family: 'Roboto', sans-serif;
+            text-align: center;
         }
         
         .btn:hover {
@@ -86,7 +99,7 @@
         }
         
         section {
-            padding: 60px 0;
+            padding: 40px 0;
         }
         
         h1, h2, h3, h4 {
@@ -98,14 +111,14 @@
         }
         
         h1 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 700;
         }
         
         h2 {
-            font-size: 2rem;
+            font-size: 1.75rem;
             text-align: center;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             position: relative;
             font-weight: 600;
         }
@@ -122,13 +135,13 @@
         }
         
         h3 {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 600;
         }
         
         p {
             margin-bottom: 1rem;
-            font-size: 1.05rem;
+            font-size: 1rem;
             color: var(--gray);
             font-weight: 400;
             line-height: 1.6;
@@ -157,7 +170,7 @@
         }
         
         .logo img {
-            height: 60px;
+            height: 50px;
             transition: transform 0.3s ease;
         }
         
@@ -178,7 +191,7 @@
             text-decoration: none;
             color: #333;
             font-weight: 500;
-            font-size: 1.05rem;
+            font-size: 1rem;
             transition: color 0.3s ease;
             position: relative;
             font-family: 'Roboto', sans-serif;
@@ -290,6 +303,7 @@
             align-items: center;
             color: white;
             text-align: center;
+            padding-top: 80px; /* Account for fixed header */
         }
         
         .hero-content {
@@ -298,7 +312,7 @@
         }
         
         .hero h1 {
-            font-size: 3rem;
+            font-size: 2.25rem;
             margin-bottom: 1.5rem;
             color: white;
             font-family: 'Roboto', sans-serif;
@@ -306,8 +320,8 @@
         }
         
         .hero p {
-            font-size: 1.25rem;
-            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
             color: rgba(255,255,255,0.9);
             font-family: 'Roboto', sans-serif;
             line-height: 1.6;
@@ -317,8 +331,9 @@
         .hero-btns {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 1rem;
             margin-top: 2rem;
+            flex-wrap: wrap;
         }
         
         /* Featured Courses */
@@ -364,7 +379,7 @@
         }
         
         .course-content {
-            padding: 1.5rem;
+            padding: 1.25rem;
         }
         
         .course-content h3 {
@@ -375,7 +390,7 @@
         .course-content p {
             margin-bottom: 1.25rem;
             color: var(--gray);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
         
         .course-meta {
@@ -394,7 +409,7 @@
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            gap: 2rem;
             align-items: center;
         }
         
@@ -435,7 +450,7 @@
         }
         
         .stat-number {
-            font-size: 1.75rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--blue);
             margin-bottom: 0.5rem;
@@ -452,7 +467,7 @@
             background: linear-gradient(to right, var(--blue), var(--maroon));
             color: white;
             text-align: center;
-            padding: 4rem 0;
+            padding: 3rem 0;
         }
         
         .cta h2 {
@@ -467,7 +482,7 @@
         .cta p {
             max-width: 700px;
             margin: 0 auto 1.5rem;
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: rgba(255,255,255,0.9);
         }
         
@@ -475,19 +490,19 @@
         footer {
             background-color: #1a1a2e;
             color: white;
-            padding: 3rem 0 1rem;
+            padding: 2rem 0 1rem;
         }
         
         .footer-content {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
         }
         
         .footer-column h3 {
             color: white;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1rem;
             font-size: 1.1rem;
             position: relative;
         }
@@ -553,6 +568,67 @@
             font-size: 0.8rem;
         }
         
+        /* PWA Install Prompt */
+        .pwa-install-prompt {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--white);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1002;
+            display: none;
+            max-width: 90%;
+            width: 400px;
+        }
+        
+        .pwa-install-prompt.show {
+            display: block;
+            animation: slideUp 0.3s ease;
+        }
+        
+        .pwa-install-prompt p {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .pwa-install-btns {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .pwa-install-btns button {
+            flex: 1;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .pwa-install-btns .install-btn {
+            background-color: var(--blue);
+            color: white;
+        }
+        
+        .pwa-install-btns .dismiss-btn {
+            background-color: #eee;
+            color: #333;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+        
         /* Responsive Design */
         @media (max-width: 992px) {
             .about-content {
@@ -578,11 +654,11 @@
             }
             
             .hero h1 {
-                font-size: 2.25rem;
+                font-size: 1.75rem;
             }
             
             .hero p {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
             
             .hero-btns {
@@ -601,11 +677,34 @@
             }
             
             h1 {
-                font-size: 2rem;
+                font-size: 1.75rem;
             }
             
             h2 {
-                font-size: 1.75rem;
+                font-size: 1.5rem;
+            }
+            
+            section {
+                padding: 30px 0;
+            }
+            
+            .hero {
+                padding-top: 70px;
+                height: 80vh;
+                min-height: 500px;
+            }
+            
+            .courses-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .course-content {
+                padding: 1rem;
+            }
+            
+            .footer-content {
+                gap: 1rem;
             }
         }
         
@@ -619,11 +718,29 @@
             }
             
             .hero h1 {
-                font-size: 1.75rem;
+                font-size: 1.5rem;
             }
             
             .logo img {
-                height: 50px;
+                height: 45px;
+            }
+            
+            .pwa-install-prompt {
+                width: 90%;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            html {
+                font-size: 14px;
+            }
+            
+            .hero h1 {
+                font-size: 1.4rem;
+            }
+            
+            .hero p {
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -668,6 +785,15 @@
     
     <!-- Overlay for mobile menu -->
     <div class="overlay" id="overlay"></div>
+
+    <!-- PWA Install Prompt -->
+    <div class="pwa-install-prompt" id="pwa-prompt">
+        <p>Install Hekima Hub app for a better experience?</p>
+        <div class="pwa-install-btns">
+            <button class="install-btn" id="install-btn">Install</button>
+            <button class="dismiss-btn" id="dismiss-btn">Not Now</button>
+        </div>
+    </div>
 
     <!-- Hero Section (Cover Page) -->
     <section class="hero" id="home">
@@ -749,6 +875,7 @@
                 
                 <div class="about-img">
                     <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="About Hekima Hub">
+                </div>
             </div>
         </div>
     </section>
@@ -835,6 +962,49 @@
         // Close menu when clicking on links
         document.querySelectorAll('.side-menu a').forEach(link => {
             link.addEventListener('click', closeSideMenu);
+        });
+
+        // PWA Installation
+        let deferredPrompt;
+        const pwaPrompt = document.getElementById('pwa-prompt');
+        const installBtn = document.getElementById('install-btn');
+        const dismissBtn = document.getElementById('dismiss-btn');
+        
+        // Show install prompt when app can be installed
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent the mini-infobar from appearing on mobile
+            e.preventDefault();
+            // Stash the event so it can be triggered later
+            deferredPrompt = e;
+            // Show the install prompt
+            setTimeout(() => {
+                pwaPrompt.classList.add('show');
+            }, 3000);
+        });
+        
+        // Install button click handler
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                // Show the install prompt
+                deferredPrompt.prompt();
+                // Wait for the user to respond to the prompt
+                const { outcome } = await deferredPrompt.userChoice;
+                // We've used the prompt, and can't use it again, discard it
+                deferredPrompt = null;
+                // Hide the prompt
+                pwaPrompt.classList.remove('show');
+            }
+        });
+        
+        // Dismiss button click handler
+        dismissBtn.addEventListener('click', () => {
+            pwaPrompt.classList.remove('show');
+        });
+        
+        // Hide the prompt when app is successfully installed
+        window.addEventListener('appinstalled', () => {
+            pwaPrompt.classList.remove('show');
+            deferredPrompt = null;
         });
     </script>
 </body>
