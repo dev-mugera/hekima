@@ -75,6 +75,14 @@
             background-color: var(--dark-maroon);
         }
         
+        .btn-green {
+            background-color: var(--green);
+        }
+        
+        .btn-orange {
+            background-color: var(--orange);
+        }
+        
         section {
             padding: 60px 0;
         }
@@ -333,6 +341,17 @@
             height: 160px;
             background-size: cover;
             background-position: center;
+            position: relative;
+        }
+        
+        .course-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3));
         }
         
         .course-content {
@@ -657,12 +676,11 @@
             <div class="courses-grid">
                 <!-- Data Entry Course -->
                 <div class="course-card">
-                    <div class="course-img" style="background-color: var(--light-blue); display: flex; align-items: center; justify-content: center;">
-                        <i class="fas fa-keyboard" style="font-size: 3rem; color: var(--blue);"></i>
+                    <div class="course-img" style="background-image: url('https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');">
                     </div>
                     <div class="course-content">
                         <h3>Data Entry Mastery</h3>
-                        <p>Learn efficient data entry techniques, keyboard shortcuts, and data management skills to boost your productivity and accuracy.</p>
+                        <p>Learn efficient data entry techniques, keyboard shortcuts, and data management skills to boost your productivity and accuracy in today's data-driven workplace.</p>
                         <a href="courses.html" class="btn btn-green">Enroll Now</a>
                         <div class="course-meta">
                             <span><i class="far fa-clock"></i> 6 Weeks</span>
@@ -673,12 +691,11 @@
                 
                 <!-- Financial Management Course -->
                 <div class="course-card">
-                    <div class="course-img" style="background-color: var(--light-maroon); display: flex; align-items: center; justify-content: center;">
-                        <i class="fas fa-chart-line" style="font-size: 3rem; color: var(--maroon);"></i>
+                    <div class="course-img" style="background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');">
                     </div>
                     <div class="course-content">
                         <h3>Financial Management</h3>
-                        <p>Master budgeting, investment strategies, and financial analysis to make informed decisions for personal and business finances.</p>
+                        <p>Master budgeting, investment strategies, and financial analysis to make informed decisions for personal and business finances. Learn from industry experts.</p>
                         <a href="courses.html" class="btn btn-maroon">Enroll Now</a>
                         <div class="course-meta">
                             <span><i class="far fa-clock"></i> 8 Weeks</span>
@@ -689,12 +706,11 @@
                 
                 <!-- Effective Leadership Course -->
                 <div class="course-card">
-                    <div class="course-img" style="background-color: #fff3e0; display: flex; align-items: center; justify-content: center;">
-                        <i class="fas fa-users" style="font-size: 3rem; color: var(--orange);"></i>
+                    <div class="course-img" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');">
                     </div>
                     <div class="course-content">
                         <h3>Effective Leadership</h3>
-                        <p>Develop essential leadership skills, team management techniques, and communication strategies to inspire and guide others.</p>
+                        <p>Develop essential leadership skills, team management techniques, and communication strategies to inspire and guide others toward shared goals.</p>
                         <a href="courses.html" class="btn btn-orange">Enroll Now</a>
                         <div class="course-meta">
                             <span><i class="far fa-clock"></i> 10 Weeks</span>
