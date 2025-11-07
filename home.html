@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hekima Hub - Private Tutoring Excellence</title>
-    <link rel="icon" type="image/x-icon" href="https://i.postimg.cc/BbqKHJvt/Whats-App-Image-2025-11-07-at-12-10-58-removebg-preview.png">
+    <link rel="icon" type="image/x-icon" href="https://i.postimg.cc/ncNcvdsr/unnamed.png">
     
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#1a73e8">
@@ -293,7 +293,7 @@
             visibility: visible;
         }
         
-        /* Hero Section */
+        /* Hero Section - Redesigned */
         .hero {
             height: 100vh;
             background: linear-gradient(rgba(26, 115, 232, 0.85), rgba(139, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
@@ -312,15 +312,16 @@
         }
         
         .hero h1 {
-            font-size: 2.25rem;
+            font-size: 2.5rem;
             margin-bottom: 1.5rem;
             color: white;
             font-family: 'Roboto', sans-serif;
             font-weight: 700;
+            line-height: 1.2;
         }
         
         .hero p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             margin-bottom: 2rem;
             color: rgba(255,255,255,0.9);
             font-family: 'Roboto', sans-serif;
@@ -336,9 +337,51 @@
             flex-wrap: wrap;
         }
         
-        /* Featured Courses */
-        .featured-courses {
+        /* Learning Formats Section */
+        .learning-formats {
             background-color: var(--white);
+            padding: 40px 0;
+        }
+        
+        .formats-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .format-card {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            max-width: 250px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .format-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .format-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--blue);
+        }
+        
+        .format-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Featured Courses Section - Redesigned */
+        .featured-courses {
+            background-color: var(--light-blue);
         }
         
         .courses-grid {
@@ -399,6 +442,31 @@
             margin-top: 1rem;
             color: #777;
             font-size: 0.85rem;
+        }
+        
+        /* Chat CTA Section */
+        .chat-cta {
+            background-color: var(--white);
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .chat-box {
+            background-color: var(--light-blue);
+            border-radius: 8px;
+            padding: 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .chat-box h3 {
+            margin-bottom: 1rem;
+            color: var(--dark-blue);
+        }
+        
+        .chat-box p {
+            margin-bottom: 1.5rem;
         }
         
         /* About Section */
@@ -731,11 +799,11 @@
             }
             
             .hero h1 {
-                font-size: 1.75rem;
+                font-size: 2rem;
             }
             
             .hero p {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
             
             .hero-btns {
@@ -811,11 +879,11 @@
             }
             
             .hero h1 {
-                font-size: 1.5rem;
+                font-size: 1.75rem;
             }
             
             .logo img {
-                height: 45px;
+                height: 50px;
             }
             
             .pwa-install-prompt {
@@ -845,11 +913,11 @@
             }
             
             .hero h1 {
-                font-size: 1.4rem;
+                font-size: 1.6rem;
             }
             
             .hero p {
-                font-size: 0.9rem;
+                font-size: 1rem;
             }
         }
     </style>
@@ -914,15 +982,55 @@
         <i class="fas fa-chevron-up"></i>
     </div>
 
-    <!-- Hero Section (Cover Page) -->
+    <!-- Hero Section (Cover Page) - Redesigned -->
     <section class="hero" id="home">
         <div class="container hero-content">
-            <h1>Unlock Your Potential with Hekima Hub</h1>
-            <p>Master in-demand skills with our expert-led courses. Join thousands of students who have transformed their careers through our personalized tutoring approach.</p>
+            <h1>Shape Your Future with Personalized Tutoring Excellence</h1>
+            <p>Whether you are a high school student, a university student or a working professional looking to upskill, Hekima Hub offers world-class training tailored to your journey. We meet you where you are and guide you to where you want to go.</p>
             
             <div class="hero-btns">
-                <a href="courses.html" class="btn">Explore Courses</a>
-                <a href="about-us.html" class="btn btn-maroon">Learn More</a>
+                <a href="courses.html" class="btn">Our Courses</a>
+                <a href="about-us.html" class="btn btn-maroon">About Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Formats Section -->
+    <section class="learning-formats">
+        <div class="container">
+            <h2>Flexible Learning Options</h2>
+            <div class="formats-container">
+                <div class="format-card">
+                    <div class="format-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Full-time Classes</h3>
+                    <p>Intensive programs for rapid skill development</p>
+                </div>
+                
+                <div class="format-card">
+                    <div class="format-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Part-time Classes</h3>
+                    <p>Flexible schedules for working professionals</p>
+                </div>
+                
+                <div class="format-card">
+                    <div class="format-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3>Remote Learning</h3>
+                    <p>Learn from anywhere with online resources</p>
+                </div>
+                
+                <div class="format-card">
+                    <div class="format-icon">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <h3>In-person Learning</h3>
+                    <p>Face-to-face instruction for personalized attention</p>
+                </div>
             </div>
         </div>
     </section>
@@ -981,6 +1089,19 @@
         </div>
     </section>
 
+    <!-- Chat CTA Section -->
+    <section class="chat-cta">
+        <div class="container">
+            <div class="chat-box">
+                <h3>Get any Questions?</h3>
+                <p>Our education advisors are here to help you choose the right course and answer any questions you might have about our programs.</p>
+                <a href="https://wa.me/254727211191" class="btn btn-green" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Chat with us
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- About Us Section -->
     <section class="about" id="about">
         <div class="container">
@@ -990,6 +1111,21 @@
                     <p>Hekima Hub was founded with a vision to make quality education accessible to everyone. Our name "Hekima" means wisdom in Swahili, reflecting our commitment to nurturing knowledge and skills that transform lives.</p>
                     <p>We specialize in personalized tutoring that adapts to each student's learning style, pace, and goals. Our expert instructors are passionate about helping you achieve your full potential.</p>
                     <p>Whether you're looking to advance your career, learn new skills, or prepare for exams, Hekima Hub provides the guidance and resources you need to succeed.</p>
+                    
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-text">Students Trained</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">15+</div>
+                            <div class="stat-text">Expert Tutors</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">95%</div>
+                            <div class="stat-text">Success Rate</div>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="about-img">
