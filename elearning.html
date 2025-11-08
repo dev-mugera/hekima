@@ -1,0 +1,2023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hekima Hub - Student eLearning Platform</title>
+    <link rel="icon" type="image/x-icon" href="https://i.postimg.cc/ncNcvdsr/unnamed.png">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#1a73e8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Hekima Hub">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="msapplication-TileColor" content="#1a73e8">
+    <meta name="msapplication-tap-highlight" content="no">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Modern CSS Variables */
+        :root {
+            --blue: #1a73e8;
+            --maroon: #8b0000;
+            --white: #ffffff;
+            --green: #34a853;
+            --orange: #ff9800;
+            --light-blue: #e8f0fe;
+            --light-maroon: #f5e6e6;
+            --dark-blue: #0d47a1;
+            --dark-maroon: #5a0000;
+            --gray: #5f6368;
+            --light-gray: #f8f9fa;
+            --dark-gray: #3c4043;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --hover-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --gradient-primary: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+            --gradient-secondary: linear-gradient(135deg, #8b0000 0%, #5a0000 100%);
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 24px;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(26, 115, 232, 0.3);
+            min-height: 48px;
+            flex-shrink: 0;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(26, 115, 232, 0.4);
+        }
+        
+        .btn-maroon {
+            background: var(--gradient-secondary);
+            box-shadow: 0 2px 6px rgba(139, 0, 0, 0.3);
+        }
+        
+        .btn-maroon:hover {
+            box-shadow: 0 4px 12px rgba(139, 0, 0, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--blue);
+            color: var(--blue);
+            box-shadow: none;
+        }
+        
+        .btn-outline:hover {
+            background: var(--blue);
+            color: white;
+        }
+        
+        .btn-small {
+            padding: 10px 18px;
+            font-size: 0.875rem;
+            min-height: 42px;
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        h1, h2, h3, h4 {
+            margin-bottom: 1rem;
+            color: var(--dark-blue);
+            font-weight: 700;
+            line-height: 1.2;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            font-weight: 700;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: var(--gray);
+            font-weight: 400;
+            line-height: 1.6;
+        }
+        
+        /* Modern Header */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            transition: var(--transition);
+        }
+        
+        .logo:hover img {
+            transform: scale(1.05);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: var(--transition);
+            position: relative;
+            font-family: 'Inter', sans-serif;
+            padding: 0.5rem 0;
+        }
+        
+        nav ul li a:hover {
+            color: var(--blue);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        nav ul li a.active {
+            color: var(--blue);
+        }
+        
+        nav ul li a.active::after {
+            width: 100%;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.25rem;
+            cursor: pointer;
+            color: var(--blue);
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+        
+        /* Side Menu for Mobile */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 280px;
+            height: 100%;
+            background-color: var(--white);
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            z-index: 1001;
+            transition: var(--transition);
+            padding: 4rem 1.5rem 1.5rem;
+            overflow-y: auto;
+        }
+        
+        .side-menu.open {
+            right: 0;
+        }
+        
+        .side-menu ul {
+            list-style: none;
+        }
+        
+        .side-menu ul li {
+            margin-bottom: 1rem;
+        }
+        
+        .side-menu ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 1.1rem;
+            display: block;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #eee;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .side-menu ul li a:hover {
+            color: var(--blue);
+        }
+        
+        .side-menu .close-btn {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            font-size: 1.25rem;
+            cursor: pointer;
+            color: var(--blue);
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 85vh;
+            background: linear-gradient(rgba(26, 115, 232, 0.85), rgba(139, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-weight: 800;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            color: rgba(255,255,255,0.9);
+            font-weight: 400;
+            line-height: 1.6;
+        }
+        
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+        
+        /* Dashboard Section */
+        .dashboard {
+            background-color: var(--white);
+            padding: 60px 0;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .dashboard-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+            overflow-x: auto;
+            padding-bottom: 2px;
+        }
+        
+        .tab-btn {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            white-space: nowrap;
+            min-height: 48px;
+            flex-shrink: 0;
+        }
+        
+        .tab-btn.active {
+            color: var(--blue);
+        }
+        
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-primary);
+            border-radius: 3px 3px 0 0;
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Scheduled Classes Section */
+        .scheduled-classes {
+            margin-bottom: 3rem;
+        }
+        
+        .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .class-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            border: 1px solid #f0f0f0;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .class-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+        
+        .class-header {
+            padding: 1.5rem;
+            background: var(--gradient-primary);
+            color: white;
+        }
+        
+        .class-header h3 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        
+        .class-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            flex-wrap: wrap;
+        }
+        
+        .class-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .class-description {
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        
+        .class-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            gap: 1rem;
+        }
+        
+        .class-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        
+        .status-live {
+            background-color: var(--green);
+            animation: pulse 2s infinite;
+        }
+        
+        .status-upcoming {
+            background-color: var(--orange);
+        }
+        
+        .status-completed {
+            background-color: var(--gray);
+        }
+        
+        /* Google Tools Section */
+        .google-tools {
+            background-color: var(--light-gray);
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .tool-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            border: 1px solid #f0f0f0;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+        
+        .tool-icon {
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: var(--blue);
+            background: var(--light-blue);
+        }
+        
+        .tool-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .tool-content h3 {
+            color: var(--dark-blue);
+            margin-bottom: 0.75rem;
+        }
+        
+        .tool-content p {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+        
+        /* Class Detail Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1002;
+            overflow-y: auto;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background-color: var(--white);
+            margin: 5% auto;
+            padding: 0;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 800px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: modalSlideIn 0.3s ease;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+            z-index: 1;
+            background: rgba(255,255,255,0.8);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            border: none;
+        }
+        
+        .close-modal:hover {
+            color: var(--maroon);
+            background: rgba(255,255,255,1);
+            transform: rotate(90deg);
+        }
+        
+        .modal-header {
+            padding: 2rem 2rem 1rem;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+        }
+        
+        .modal-header h2 {
+            color: white;
+            text-align: left;
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-header h2::after {
+            display: none;
+        }
+        
+        .modal-body {
+            padding: 2rem;
+        }
+        
+        .class-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .detail-group h4 {
+            color: var(--dark-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background: var(--light-gray);
+            border-radius: 8px;
+        }
+        
+        .detail-item i {
+            color: var(--blue);
+            font-size: 1.1rem;
+            width: 20px;
+        }
+        
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            padding: 0 2rem 2rem;
+            flex-wrap: wrap;
+        }
+        
+        /* Google Classroom Modal Styles */
+        .classroom-content {
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        
+        .classroom-class {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        
+        .classroom-class-header {
+            background: var(--light-blue);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .classroom-class-body {
+            padding: 1rem;
+        }
+        
+        .assignment-list {
+            list-style: none;
+        }
+        
+        .assignment-item {
+            padding: 0.75rem;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .assignment-item:last-child {
+            border-bottom: none;
+        }
+        
+        .assignment-due {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+        
+        .assignment-status {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-completed {
+            background: #d1edff;
+            color: var(--blue);
+        }
+        
+        .status-overdue {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        /* Google Meet Modal Styles */
+        .meet-sessions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .meet-session {
+            background: var(--white);
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .meet-session:hover {
+            box-shadow: var(--card-shadow);
+            transform: translateY(-2px);
+        }
+        
+        .meet-session.live {
+            border-left: 4px solid var(--green);
+        }
+        
+        .meet-session.upcoming {
+            border-left: 4px solid var(--orange);
+        }
+        
+        .session-time {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+        }
+        
+        .session-participants {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+        
+        /* Virtual Meeting Container */
+        .virtual-meeting {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1a1a1a;
+            z-index: 1003;
+            flex-direction: column;
+        }
+        
+        .meeting-header {
+            background: #2d2d2d;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .meeting-controls {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .control-btn {
+            background: #3d3d3d;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .control-btn:hover {
+            background: #4d4d4d;
+        }
+        
+        .control-btn.end-call {
+            background: #d32f2f;
+        }
+        
+        .control-btn.end-call:hover {
+            background: #b71c1c;
+        }
+        
+        .meeting-content {
+            flex: 1;
+            display: flex;
+            padding: 1rem;
+            gap: 1rem;
+        }
+        
+        .video-container {
+            flex: 1;
+            background: #000;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .video-placeholder {
+            color: white;
+            text-align: center;
+        }
+        
+        .video-placeholder i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+        
+        .participants-sidebar {
+            width: 300px;
+            background: #2d2d2d;
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+        
+        .participant-list {
+            list-style: none;
+        }
+        
+        .participant-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            color: white;
+            border-bottom: 1px solid #3d3d3d;
+        }
+        
+        .participant-item:last-child {
+            border-bottom: none;
+        }
+        
+        .participant-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* Resources Section */
+        .resources {
+            background-color: var(--white);
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .resource-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            transition: var(--transition);
+            box-shadow: var(--card-shadow);
+            border: 1px solid #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+        
+        .resource-icon {
+            font-size: 3rem;
+            color: var(--blue);
+            margin-bottom: 1.5rem;
+            background: var(--light-blue);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .resource-card h3 {
+            color: var(--dark-blue);
+            margin-bottom: 1rem;
+        }
+        
+        /* CTA Section */
+        .cta {
+            background: var(--gradient-primary);
+            color: white;
+            text-align: center;
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        
+        .cta h2 {
+            color: white;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta h2::after {
+            background-color: white;
+        }
+        
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.9);
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #1a1a2e;
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-column ul li a {
+            color: #bbb;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--orange);
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--orange);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes modalSlideIn {
+            from { 
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: row;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 280px;
+                margin-bottom: 0.5rem;
+                justify-content: center;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.75rem;
+            }
+            
+            section {
+                padding: 40px 0;
+            }
+            
+            .hero {
+                padding-top: 70px;
+                height: 70vh;
+                min-height: 500px;
+            }
+            
+            .classes-grid, .tools-grid, .resources-grid {
+                grid-template-columns: 1fr;
+                gap: 1.25rem;
+            }
+            
+            .class-details {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .dashboard-tabs {
+                width: 100%;
+                overflow-x: auto;
+            }
+            
+            .class-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .class-footer .btn {
+                width: 100%;
+            }
+            
+            .modal-footer {
+                flex-direction: column;
+            }
+            
+            .modal-footer .btn {
+                width: 100%;
+            }
+            
+            .meet-sessions {
+                grid-template-columns: 1fr;
+            }
+            
+            .meeting-content {
+                flex-direction: column;
+            }
+            
+            .participants-sidebar {
+                width: 100%;
+                max-height: 200px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+            
+            .class-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .btn-small {
+                padding: 12px 16px;
+                font-size: 0.85rem;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            html {
+                font-size: 14px;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 12px 16px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="home.html">
+                    <img src="https://i.postimg.cc/BbqKHJvt/Whats-App-Image-2025-11-07-at-12-10-58-removebg-preview.png" alt="Hekima Hub Logo">
+                </a>
+            </div>
+            
+            <nav>
+                <ul id="nav-menu">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                    <li><a href="#" class="active">E-Learning</a></li>
+                </ul>
+            </nav>
+            
+            <button class="mobile-menu" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Side Menu for Mobile -->
+    <div class="side-menu" id="side-menu">
+        <button class="close-btn" id="close-menu">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="#" class="active">E-Learning</a></li>
+        </ul>
+    </div>
+    
+    <!-- Overlay for mobile menu -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Virtual Meeting Container -->
+    <div class="virtual-meeting" id="virtual-meeting">
+        <div class="meeting-header">
+            <div class="meeting-title">
+                <h3 id="meeting-name">Financial Management - Live Session</h3>
+                <p id="meeting-time">Live Now • 18 participants</p>
+            </div>
+            <div class="meeting-controls">
+                <button class="control-btn" id="mute-audio">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <button class="control-btn" id="mute-video">
+                    <i class="fas fa-video"></i>
+                </button>
+                <button class="control-btn" id="share-screen">
+                    <i class="fas fa-desktop"></i>
+                </button>
+                <button class="control-btn end-call" id="end-call">
+                    <i class="fas fa-phone-slash"></i>
+                </button>
+            </div>
+        </div>
+        <div class="meeting-content">
+            <div class="video-container">
+                <div class="video-placeholder">
+                    <i class="fas fa-user-circle"></i>
+                    <p>Your video is off</p>
+                    <p>Dr. Williams is presenting</p>
+                </div>
+            </div>
+            <div class="participants-sidebar">
+                <h4>Participants (18)</h4>
+                <ul class="participant-list">
+                    <li class="participant-item">
+                        <div class="participant-avatar" style="background: var(--green);">DW</div>
+                        <div>
+                            <div>Dr. Williams (Host)</div>
+                            <div style="font-size: 0.8rem; opacity: 0.7;">Presenting</div>
+                        </div>
+                    </li>
+                    <li class="participant-item">
+                        <div class="participant-avatar" style="background: var(--blue);">Y</div>
+                        <div>You</div>
+                    </li>
+                    <li class="participant-item">
+                        <div class="participant-avatar" style="background: var(--orange);">SJ</div>
+                        <div>Sarah Johnson</div>
+                    </li>
+                    <li class="participant-item">
+                        <div class="participant-avatar" style="background: var(--maroon);">MK</div>
+                        <div>Michael Kim</div>
+                    </li>
+                    <li class="participant-item">
+                        <div class="participant-avatar" style="background: #6a1b9a;">AR</div>
+                        <div>Amira Rahman</div>
+                    </li>
+                    <li class="participant-item">
+                        <div class="participant-avatar" style="background: #00838f;">TJ</div>
+                        <div>Thomas Jones</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1>Student eLearning Platform</h1>
+            <p>Access your courses, join virtual classes, and utilize powerful learning tools - all in one modern digital environment.</p>
+            
+            <div class="hero-btns">
+                <a href="#dashboard" class="btn">Go to Dashboard</a>
+                <a href="#scheduled-classes" class="btn btn-outline">View My Classes</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section class="dashboard" id="dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <h2>Student Dashboard</h2>
+                <div class="user-info">
+                    <span class="btn btn-outline"><i class="fas fa-user-graduate"></i> Student Portal</span>
+                </div>
+            </div>
+            
+            <!-- Student View Tab -->
+            <div class="tab-content active" id="student-tab">
+                <div class="scheduled-classes" id="scheduled-classes">
+                    <h3>My Scheduled Classes</h3>
+                    <div class="classes-grid">
+                        <!-- Data Entry Class -->
+                        <div class="class-card" data-class="data-entry">
+                            <div class="class-header">
+                                <h3>Data Entry Mastery</h3>
+                                <div class="class-meta">
+                                    <span><i class="far fa-clock"></i> Mon & Wed, 10:00 AM</span>
+                                    <span><i class="fas fa-user-tie"></i> Mr. Johnson</span>
+                                </div>
+                            </div>
+                            <div class="class-body">
+                                <div class="class-description">
+                                    <p>Learn efficient data entry techniques, keyboard shortcuts, and data management skills to boost productivity.</p>
+                                </div>
+                                <div class="class-footer">
+                                    <div class="class-status">
+                                        <span class="status-indicator status-upcoming"></span>
+                                        <span>Starts in 2 days</span>
+                                    </div>
+                                    <button class="btn btn-maroon view-class-btn">View Class</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Financial Management Class -->
+                        <div class="class-card" data-class="financial-management">
+                            <div class="class-header">
+                                <h3>Financial Management</h3>
+                                <div class="class-meta">
+                                    <span><i class="far fa-clock"></i> Tue & Thu, 2:00 PM</span>
+                                    <span><i class="fas fa-user-tie"></i> Dr. Williams</span>
+                                </div>
+                            </div>
+                            <div class="class-body">
+                                <div class="class-description">
+                                    <p>Master budgeting, investment strategies, and financial analysis for informed decision-making.</p>
+                                </div>
+                                <div class="class-footer">
+                                    <div class="class-status">
+                                        <span class="status-indicator status-live"></span>
+                                        <span>Live Now</span>
+                                    </div>
+                                    <button class="btn btn-maroon join-meeting-btn" data-meeting="financial-management">Join Class</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Web Development Class -->
+                        <div class="class-card" data-class="web-development">
+                            <div class="class-header">
+                                <h3>Web Development</h3>
+                                <div class="class-meta">
+                                    <span><i class="far fa-clock"></i> Fri, 3:00 PM</span>
+                                    <span><i class="fas fa-user-tie"></i> Ms. Garcia</span>
+                                </div>
+                            </div>
+                            <div class="class-body">
+                                <div class="class-description">
+                                    <p>Learn HTML, CSS, JavaScript and build responsive websites from scratch.</p>
+                                </div>
+                                <div class="class-footer">
+                                    <div class="class-status">
+                                        <span class="status-indicator status-upcoming"></span>
+                                        <span>Tomorrow</span>
+                                    </div>
+                                    <button class="btn btn-maroon view-class-btn">View Class</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="google-tools">
+                    <h3>Learning Tools</h3>
+                    <div class="tools-grid">
+                        <div class="tool-card" data-modal="classroom-modal">
+                            <div class="tool-icon">
+                                <i class="fab fa-google"></i>
+                            </div>
+                            <div class="tool-content">
+                                <h3>Google Classroom</h3>
+                                <p>Access your virtual classrooms, assignments, and course materials in one centralized location.</p>
+                                <span class="btn">Open Classroom</span>
+                            </div>
+                        </div>
+                        
+                        <div class="tool-card" data-modal="meet-modal">
+                            <div class="tool-icon">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <div class="tool-content">
+                                <h3>Google Meet</h3>
+                                <p>Join live virtual classes, tutoring sessions, and collaborate with peers in real-time.</p>
+                                <span class="btn">Join Session</span>
+                            </div>
+                        </div>
+                        
+                        <div class="tool-card" data-modal="drive-modal">
+                            <div class="tool-icon">
+                                <i class="fas fa-cloud"></i>
+                            </div>
+                            <div class="tool-content">
+                                <h3>Google Drive</h3>
+                                <p>Store and access your learning materials, assignments, and collaborative projects.</p>
+                                <span class="btn">Open Drive</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Google Classroom Modal -->
+    <div id="classroom-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <div class="modal-header">
+                <h2>Google Classroom</h2>
+                <p>Your virtual learning environment</p>
+            </div>
+            <div class="modal-body">
+                <div class="classroom-content">
+                    <h3>Your Classes</h3>
+                    
+                    <div class="classroom-class">
+                        <div class="classroom-class-header">
+                            <h4>Data Entry Mastery</h4>
+                            <span class="btn btn-small">Active</span>
+                        </div>
+                        <div class="classroom-class-body">
+                            <p><strong>Instructor:</strong> Mr. Johnson</p>
+                            <p><strong>Class Code:</strong> abc123def</p>
+                            
+                            <h5>Recent Assignments</h5>
+                            <ul class="assignment-list">
+                                <li class="assignment-item">
+                                    <div>
+                                        <strong>Week 3: Data Accuracy Exercise</strong>
+                                        <div class="assignment-due">Due: Nov 15, 2025</div>
+                                    </div>
+                                    <span class="assignment-status status-pending">Pending</span>
+                                </li>
+                                <li class="assignment-item">
+                                    <div>
+                                        <strong>Keyboard Shortcuts Quiz</strong>
+                                        <div class="assignment-due">Due: Nov 12, 2025</div>
+                                    </div>
+                                    <span class="assignment-status status-completed">Completed</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="classroom-class">
+                        <div class="classroom-class-header">
+                            <h4>Financial Management</h4>
+                            <span class="btn btn-small">Active</span>
+                        </div>
+                        <div class="classroom-class-body">
+                            <p><strong>Instructor:</strong> Dr. Williams</p>
+                            <p><strong>Class Code:</strong> xyz789ghi</p>
+                            
+                            <h5>Recent Assignments</h5>
+                            <ul class="assignment-list">
+                                <li class="assignment-item">
+                                    <div>
+                                        <strong>Investment Portfolio Analysis</strong>
+                                        <div class="assignment-due">Due: Nov 18, 2025</div>
+                                    </div>
+                                    <span class="assignment-status status-pending">Pending</span>
+                                </li>
+                                <li class="assignment-item">
+                                    <div>
+                                        <strong>Budget Planning Exercise</strong>
+                                        <div class="assignment-due">Due: Nov 10, 2025</div>
+                                    </div>
+                                    <span class="assignment-status status-completed">Completed</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="https://classroom.google.com" class="btn" target="_blank"><i class="fab fa-google"></i> Open Google Classroom</a>
+                <button class="btn btn-outline close-modal-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google Meet Modal -->
+    <div id="meet-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <div class="modal-header">
+                <h2>Google Meet</h2>
+                <p>Join virtual classes and meetings</p>
+            </div>
+            <div class="modal-body">
+                <div class="meet-sessions">
+                    <div class="meet-session live">
+                        <h4>Financial Management - Live Session</h4>
+                        <div class="session-time">
+                            <i class="far fa-clock"></i> Live Now • Ends in 45 minutes
+                        </div>
+                        <p><strong>Host:</strong> Dr. Williams</p>
+                        <p><strong>Topic:</strong> Investment Strategies & Portfolio Management</p>
+                        <div class="session-participants">
+                            <i class="fas fa-users"></i> 18 participants joined
+                        </div>
+                        <button class="btn join-meeting-btn" data-meeting="financial-management" style="margin-top: 1rem; width: 100%;">Join Meeting</button>
+                    </div>
+                    
+                    <div class="meet-session upcoming">
+                        <h4>Data Entry Mastery - Next Session</h4>
+                        <div class="session-time">
+                            <i class="far fa-clock"></i> Tomorrow, 10:00 AM - 11:30 AM
+                        </div>
+                        <p><strong>Host:</strong> Mr. Johnson</p>
+                        <p><strong>Topic:</strong> Advanced Data Validation Techniques</p>
+                        <div class="session-participants">
+                            <i class="fas fa-user-plus"></i> Join 15 minutes early
+                        </div>
+                    </div>
+                    
+                    <div class="meet-session upcoming">
+                        <h4>Web Development Workshop</h4>
+                        <div class="session-time">
+                            <i class="far fa-clock"></i> Friday, 3:00 PM - 5:00 PM
+                        </div>
+                        <p><strong>Host:</strong> Ms. Garcia</p>
+                        <p><strong>Topic:</strong> CSS Grid and Flexbox</p>
+                        <div class="session-participants">
+                            <i class="fas fa-user-plus"></i> All students invited
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 2rem; padding: 1rem; background: var(--light-blue); border-radius: 8px;">
+                    <h4>Quick Join</h4>
+                    <p>Enter a meeting code to join immediately:</p>
+                    <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                        <input type="text" placeholder="Enter meeting code" style="flex: 1; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                        <button class="btn btn-small" id="quick-join-btn">Join</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline close-modal-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Class Detail Modals -->
+    <div id="data-entry-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <div class="modal-header">
+                <h2>Data Entry Mastery</h2>
+                <p>Mr. Johnson | Mon & Wed, 10:00 AM - 11:30 AM</p>
+            </div>
+            <div class="modal-body">
+                <div class="class-details">
+                    <div class="detail-group">
+                        <h4>Class Information</h4>
+                        <div class="detail-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <div>
+                                <strong>Next Session:</strong><br>
+                                Monday, November 10, 2025<br>
+                                10:00 AM - 11:30 AM
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <div>
+                                <strong>Instructor:</strong><br>
+                                Mr. Johnson<br>
+                                <a href="mailto:johnson@hekimahub.com">johnson@hekimahub.com</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail-group">
+                        <h4>Course Details</h4>
+                        <div class="detail-item">
+                            <i class="fas fa-book"></i>
+                            <div>
+                                <strong>Materials:</strong><br>
+                                Textbook: "Data Entry Fundamentals"<br>
+                                Software: MS Excel, Google Sheets
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-tasks"></i>
+                            <div>
+                                <strong>Assignments:</strong><br>
+                                3 pending assignments<br>
+                                Next due: November 12
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h4>Class Description</h4>
+                <p>This course provides comprehensive training in data entry techniques, keyboard shortcuts, and data management skills. Students will learn to work efficiently with various data formats and software tools commonly used in today's data-driven workplace environments.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="https://classroom.google.com/c/NjEyMzQ1Njc4MjZa" class="btn" target="_blank"><i class="fab fa-google"></i> Open Google Classroom</a>
+                <button class="btn btn-outline close-modal-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resources Section -->
+    <section class="resources">
+        <div class="container">
+            <h2>Learning Resources</h2>
+            
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <h3>Download Center</h3>
+                    <p>Access course materials, lecture notes, and supplementary resources for all your classes.</p>
+                    <a href="#" class="btn btn-maroon">Browse Files</a>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Video Library</h3>
+                    <p>Watch recorded lectures, tutorials, and educational videos at your own pace.</p>
+                    <a href="#" class="btn btn-maroon">Watch Videos</a>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>E-Books</h3>
+                    <p>Access digital textbooks and reading materials for all your courses in one place.</p>
+                    <a href="#" class="btn btn-maroon">Read Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Need Help With Our eLearning Platform?</h2>
+            <p>Our dedicated support team is available to assist students with any technical issues or questions about using our platform.</p>
+            <a href="https://wa.me/254727211191" class="btn" target="_blank"><i class="fab fa-whatsapp"></i> Get Support</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Hekima Hub</h3>
+                    <p style="color: #bbb; font-size: 0.9rem; line-height: 1.6;">Empowering students through personalized education and expert guidance to achieve academic success in the digital age.</p>
+                </div> 
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="home.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="courses.html"><i class="fas fa-chevron-right"></i> Courses</a></li>
+                        <li><a href="about-us.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> E-Learning</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Learning Resources</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Study Guides</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Video Tutorials</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Practice Tests</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> E-Books</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Research Materials</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</a></li>
+                        <li><a href="tel:+254727211191"><i class="fas fa-phone"></i> +254 727211191</a></li>
+                        <li><a href="mailto:info.hekimahub@gmail.com"><i class="fas fa-envelope"></i> info.hekimahub@gmail.com</a></li>
+                    </ul>
+                    
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Hekima Hub. All Rights Reserved. | Designed for Student Success</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        const mobileMenu = document.getElementById('mobile-menu');
+        const sideMenu = document.getElementById('side-menu');
+        const closeMenu = document.getElementById('close-menu');
+        const overlay = document.getElementById('overlay');
+        
+        // Toggle side menu
+        mobileMenu.addEventListener('click', function() {
+            sideMenu.classList.add('open');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        // Close side menu
+        function closeSideMenu() {
+            sideMenu.classList.remove('open');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        closeMenu.addEventListener('click', closeSideMenu);
+        overlay.addEventListener('click', closeSideMenu);
+        
+        // Close menu when clicking on links
+        document.querySelectorAll('.side-menu a').forEach(link => {
+            link.addEventListener('click', closeSideMenu);
+        });
+
+        // Class modal functionality
+        const viewClassBtns = document.querySelectorAll('.view-class-btn');
+        const classModals = document.querySelectorAll('.modal');
+        const closeModalBtns = document.querySelectorAll('.close-modal, .close-modal-btn');
+        
+        // Open modal when class card is clicked
+        viewClassBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const classCard = btn.closest('.class-card');
+                const classId = classCard.getAttribute('data-class');
+                document.getElementById(`${classId}-modal`).style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        // Tool card functionality
+        const toolCards = document.querySelectorAll('.tool-card');
+        
+        toolCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const modalId = card.getAttribute('data-modal');
+                if (modalId) {
+                    document.getElementById(modalId).style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+        
+        // Close modal when X is clicked
+        closeModalBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                classModals.forEach(modal => {
+                    modal.style.display = 'none';
+                });
+                document.body.style.overflow = 'auto';
+            });
+        });
+        
+        // Close modal when clicking outside content
+        window.addEventListener('click', (e) => {
+            classModals.forEach(modal => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        // Virtual Meeting Functionality
+        const virtualMeeting = document.getElementById('virtual-meeting');
+        const joinMeetingBtns = document.querySelectorAll('.join-meeting-btn');
+        const endCallBtn = document.getElementById('end-call');
+        
+        // Join meeting functionality
+        joinMeetingBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const meetingName = btn.getAttribute('data-meeting');
+                
+                // Set meeting details
+                document.getElementById('meeting-name').textContent = 
+                    meetingName === 'financial-management' 
+                    ? 'Financial Management - Live Session' 
+                    : 'Class Session';
+                
+                // Show virtual meeting
+                virtualMeeting.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                
+                // Close any open modals
+                classModals.forEach(modal => {
+                    modal.style.display = 'none';
+                });
+            });
+        });
+        
+        // End call functionality
+        endCallBtn.addEventListener('click', () => {
+            virtualMeeting.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Meeting controls
+        const muteAudioBtn = document.getElementById('mute-audio');
+        const muteVideoBtn = document.getElementById('mute-video');
+        
+        let audioMuted = false;
+        let videoMuted = false;
+        
+        muteAudioBtn.addEventListener('click', () => {
+            audioMuted = !audioMuted;
+            muteAudioBtn.innerHTML = audioMuted 
+                ? '<i class="fas fa-microphone-slash"></i>' 
+                : '<i class="fas fa-microphone"></i>';
+            muteAudioBtn.style.background = audioMuted ? '#d32f2f' : '#3d3d3d';
+        });
+        
+        muteVideoBtn.addEventListener('click', () => {
+            videoMuted = !videoMuted;
+            muteVideoBtn.innerHTML = videoMuted 
+                ? '<i class="fas fa-video-slash"></i>' 
+                : '<i class="fas fa-video"></i>';
+            muteVideoBtn.style.background = videoMuted ? '#d32f2f' : '#3d3d3d';
+        });
+
+        // Quick join functionality for Google Meet
+        document.addEventListener('DOMContentLoaded', function() {
+            const quickJoinBtn = document.getElementById('quick-join-btn');
+            const meetingCodeInput = document.querySelector('#meet-modal input[type="text"]');
+            
+            if (quickJoinBtn && meetingCodeInput) {
+                quickJoinBtn.addEventListener('click', function() {
+                    const code = meetingCodeInput.value.trim();
+                    if (code) {
+                        // Set meeting details for virtual meeting
+                        document.getElementById('meeting-name').textContent = `Meeting: ${code}`;
+                        document.getElementById('meeting-time').textContent = 'Quick Join Session';
+                        
+                        // Show virtual meeting
+                        virtualMeeting.style.display = 'flex';
+                        document.body.style.overflow = 'hidden';
+                        
+                        // Close the modal
+                        document.getElementById('meet-modal').style.display = 'none';
+                    } else {
+                        meetingCodeInput.focus();
+                    }
+                });
+                
+                meetingCodeInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        quickJoinBtn.click();
+                    }
+                });
+            }
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.08)';
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        console.log("Student eLearning Platform is now fully implemented with:");
+        console.log("- Tutor functions removed");
+        console.log("- Virtual meetings open in the same page");
+        console.log("- All student-focused features working properly");
+    </script>
+</body>
+</html>
