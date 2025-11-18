@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LearnHub - Expand Your Skills</title>
+    <title>Hekima Hub - Expand Your Knowledge</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,8 +14,10 @@
         }
 
         :root {
-            --primary: #5624d0;
-            --secondary: #a435f0;
+            --primary: #2E8B57; /* Green */
+            --secondary: #4169E1; /* Blue */
+            --accent: #800000; /* Maroon */
+            --highlight: #FFD700; /* Yellow */
             --dark: #1c1d1f;
             --light: #f7f9fa;
             --gray: #6a6f73;
@@ -86,6 +88,11 @@
             border-radius: 30px;
             padding: 7px 15px;
             cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background: var(--secondary);
         }
 
         .header-actions {
@@ -119,6 +126,10 @@
             color: var(--dark);
         }
 
+        .btn-outline:hover {
+            background: var(--light);
+        }
+
         .btn-primary {
             background: var(--primary);
             color: white;
@@ -129,12 +140,23 @@
             background: var(--secondary);
         }
 
+        .btn-accent {
+            background: var(--accent);
+            color: white;
+            border: none;
+        }
+
+        .btn-accent:hover {
+            background: #600000;
+        }
+
         .menu-toggle {
             display: none;
             background: none;
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
+            color: var(--primary);
         }
 
         /* Hero Section */
@@ -186,6 +208,20 @@
             font-size: 1.8rem;
             margin-bottom: 1.5rem;
             font-weight: 700;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--highlight);
+            border-radius: 2px;
         }
 
         .categories-grid {
@@ -199,8 +235,9 @@
             border-radius: 8px;
             padding: 1.5rem;
             text-align: center;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
+            border-top: 4px solid var(--primary);
         }
 
         .category-card:hover {
@@ -208,10 +245,34 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
+        .category-card:nth-child(2n) {
+            border-top-color: var(--secondary);
+        }
+
+        .category-card:nth-child(3n) {
+            border-top-color: var(--accent);
+        }
+
+        .category-card:nth-child(4n) {
+            border-top-color: var(--highlight);
+        }
+
         .category-icon {
             font-size: 2rem;
             margin-bottom: 1rem;
             color: var(--primary);
+        }
+
+        .category-card:nth-child(2n) .category-icon {
+            color: var(--secondary);
+        }
+
+        .category-card:nth-child(3n) .category-icon {
+            color: var(--accent);
+        }
+
+        .category-card:nth-child(4n) .category-icon {
+            color: var(--highlight);
         }
 
         /* Featured Courses */
@@ -245,7 +306,7 @@
 
         .course-image {
             height: 180px;
-            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
             position: relative;
         }
 
@@ -253,11 +314,12 @@
             position: absolute;
             top: 10px;
             left: 10px;
-            background: var(--success);
+            background: var(--accent);
             color: white;
             padding: 5px 10px;
             border-radius: 3px;
             font-size: 0.8rem;
+            font-weight: 600;
         }
 
         .course-content {
@@ -268,6 +330,7 @@
             font-size: 1.2rem;
             margin-bottom: 0.5rem;
             font-weight: 700;
+            color: var(--dark);
         }
 
         .course-instructor {
@@ -284,7 +347,7 @@
         }
 
         .rating-stars {
-            color: #f4c150;
+            color: var(--highlight);
         }
 
         .rating-count {
@@ -301,6 +364,7 @@
         .current-price {
             font-size: 1.3rem;
             font-weight: 700;
+            color: var(--primary);
         }
 
         .original-price {
@@ -309,7 +373,7 @@
         }
 
         .bestseller {
-            background: #ffe799;
+            background: var(--highlight);
             color: #593d00;
             padding: 3px 8px;
             border-radius: 3px;
@@ -334,6 +398,14 @@
         .feature {
             text-align: center;
             padding: 2rem 1rem;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
         }
 
         .feature-icon {
@@ -342,9 +414,22 @@
             margin-bottom: 1rem;
         }
 
+        .feature:nth-child(2n) .feature-icon {
+            color: var(--secondary);
+        }
+
+        .feature:nth-child(3n) .feature-icon {
+            color: var(--accent);
+        }
+
+        .feature:nth-child(4n) .feature-icon {
+            color: var(--highlight);
+        }
+
         .feature h3 {
             margin-bottom: 1rem;
             font-size: 1.3rem;
+            color: var(--dark);
         }
 
         /* Footer */
@@ -366,12 +451,13 @@
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            color: white;
+            color: var(--primary);
         }
 
         .footer-links h4 {
             margin-bottom: 1rem;
             font-size: 1.1rem;
+            color: var(--highlight);
         }
 
         .footer-links ul {
@@ -385,10 +471,11 @@
         .footer-links a {
             color: #ddd;
             text-decoration: none;
+            transition: color 0.3s ease;
         }
 
         .footer-links a:hover {
-            color: white;
+            color: var(--highlight);
             text-decoration: underline;
         }
 
@@ -460,7 +547,7 @@
         <div class="header-container">
             <a href="#" class="logo">
                 <i class="fas fa-graduation-cap"></i>
-                <span>LearnHub</span>
+                <span>Hekima Hub</span>
             </a>
             
             <div class="search-bar">
@@ -486,23 +573,23 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Learn without limits</h1>
-            <p>Start, switch, or advance your career with thousands of courses from industry experts.</p>
+            <h1>Wisdom for the Curious Mind</h1>
+            <p>Expand your knowledge with thousands of courses from expert instructors at Hekima Hub.</p>
             <div class="hero-search">
-                <input type="text" placeholder="What do you want to learn?">
+                <input type="text" placeholder="What do you want to learn today?">
             </div>
         </div>
     </section>
 
     <!-- Categories -->
     <section class="categories">
-        <h2 class="section-title">Top categories</h2>
+        <h2 class="section-title">Explore Categories</h2>
         <div class="categories-grid">
             <div class="category-card">
                 <div class="category-icon">
                     <i class="fas fa-laptop-code"></i>
                 </div>
-                <h3>Development</h3>
+                <h3>Technology</h3>
             </div>
             <div class="category-card">
                 <div class="category-icon">
@@ -542,9 +629,9 @@
             </div>
             <div class="category-card">
                 <div class="category-icon">
-                    <i class="fas fa-chart-bar"></i>
+                    <i class="fas fa-language"></i>
                 </div>
-                <h3>Marketing</h3>
+                <h3>Languages</h3>
             </div>
         </div>
     </section>
@@ -552,15 +639,15 @@
     <!-- Featured Courses -->
     <section class="featured-courses">
         <div class="courses-container">
-            <h2 class="section-title">Featured courses</h2>
+            <h2 class="section-title">Featured Courses</h2>
             <div class="courses-grid">
                 <div class="course-card">
                     <div class="course-image">
                         <div class="course-badge">Bestseller</div>
                     </div>
                     <div class="course-content">
-                        <h3 class="course-title">The Complete Web Development Bootcamp</h3>
-                        <p class="course-instructor">Dr. Angela Yu</p>
+                        <h3 class="course-title">Complete Web Development Masterclass</h3>
+                        <p class="course-instructor">Dr. Sarah Johnson</p>
                         <div class="course-rating">
                             <div class="rating-stars">
                                 <i class="fas fa-star"></i>
@@ -584,8 +671,8 @@
                         <div class="course-badge">Bestseller</div>
                     </div>
                     <div class="course-content">
-                        <h3 class="course-title">Python for Data Science and Machine Learning</h3>
-                        <p class="course-instructor">Jose Portilla</p>
+                        <h3 class="course-title">Data Science & Machine Learning</h3>
+                        <p class="course-instructor">Prof. Michael Chen</p>
                         <div class="course-rating">
                             <div class="rating-stars">
                                 <i class="fas fa-star"></i>
@@ -609,8 +696,8 @@
                         <div class="course-badge">New</div>
                     </div>
                     <div class="course-content">
-                        <h3 class="course-title">Digital Marketing Masterclass</h3>
-                        <p class="course-instructor">Phil Ebiner</p>
+                        <h3 class="course-title">Digital Marketing Strategy</h3>
+                        <p class="course-instructor">Alex Rodriguez</p>
                         <div class="course-rating">
                             <div class="rating-stars">
                                 <i class="fas fa-star"></i>
@@ -633,35 +720,35 @@
 
     <!-- Why Choose Us -->
     <section class="why-choose">
-        <h2 class="section-title">Why learn with LearnHub?</h2>
+        <h2 class="section-title">Why Choose Hekima Hub?</h2>
         <div class="features-grid">
             <div class="feature">
                 <div class="feature-icon">
                     <i class="fas fa-play-circle"></i>
                 </div>
-                <h3>130,000+ online courses</h3>
-                <p>Explore a variety of fresh topics and learn at your own pace</p>
+                <h3>150,000+ Online Courses</h3>
+                <p>Explore a variety of topics and learn at your own pace with our extensive library</p>
             </div>
             <div class="feature">
                 <div class="feature-icon">
                     <i class="fas fa-infinity"></i>
                 </div>
-                <h3>Lifetime access</h3>
-                <p>Learn on your schedule with lifetime access to courses</p>
+                <h3>Lifetime Access</h3>
+                <p>Learn on your schedule with lifetime access to all your purchased courses</p>
             </div>
             <div class="feature">
                 <div class="feature-icon">
                     <i class="fas fa-chalkboard-teacher"></i>
                 </div>
-                <h3>Expert instructors</h3>
-                <p>Learn from industry experts who are passionate about teaching</p>
+                <h3>Expert Instructors</h3>
+                <p>Learn from industry experts who are passionate about sharing their knowledge</p>
             </div>
             <div class="feature">
                 <div class="feature-icon">
                     <i class="fas fa-mobile-alt"></i>
                 </div>
-                <h3>Learn on any device</h3>
-                <p>Access courses on your computer, tablet, or mobile device</p>
+                <h3>Learn Anywhere</h3>
+                <p>Access courses on your computer, tablet, or mobile device anytime, anywhere</p>
             </div>
         </div>
     </section>
@@ -670,11 +757,11 @@
     <footer>
         <div class="footer-container">
             <div class="footer-col">
-                <div class="footer-logo">LearnHub</div>
-                <p>Learn without limits and advance your career with courses from industry experts.</p>
+                <div class="footer-logo">Hekima Hub</div>
+                <p>Wisdom for the curious mind. Expand your knowledge with courses from industry experts.</p>
             </div>
             <div class="footer-links">
-                <h4>LearnHub</h4>
+                <h4>Hekima Hub</h4>
                 <ul>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Careers</a></li>
@@ -685,7 +772,7 @@
             <div class="footer-links">
                 <h4>Categories</h4>
                 <ul>
-                    <li><a href="#">Development</a></li>
+                    <li><a href="#">Technology</a></li>
                     <li><a href="#">Business</a></li>
                     <li><a href="#">Design</a></li>
                     <li><a href="#">Marketing</a></li>
@@ -702,7 +789,7 @@
             </div>
         </div>
         <div class="copyright">
-            <p>&copy; 2023 LearnHub. All rights reserved.</p>
+            <p>&copy; 2023 Hekima Hub. All rights reserved.</p>
         </div>
     </footer>
 
@@ -717,6 +804,14 @@
             card.addEventListener('click', function() {
                 const categoryName = this.querySelector('h3').textContent;
                 alert(`You clicked on ${categoryName}. This would navigate to the category page.`);
+            });
+        });
+        
+        // Add interactivity to course cards
+        document.querySelectorAll('.course-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const courseName = this.querySelector('.course-title').textContent;
+                alert(`You clicked on ${courseName}. This would navigate to the course details page.`);
             });
         });
     </script>
