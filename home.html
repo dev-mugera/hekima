@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hekima Hub - Premium Learning Platform</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -118,11 +118,119 @@
             justify-content: center;
         }
         
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            position: relative;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        nav ul li a:hover {
+            color: var(--blue);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--blue);
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
         .mobile-menu {
             display: none;
             font-size: 1.25rem;
             cursor: pointer;
             color: var(--blue);
+        }
+        
+        /* Side Menu for Mobile */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 280px;
+            height: 100%;
+            background-color: var(--white);
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            z-index: 1001;
+            transition: right 0.3s ease;
+            padding: 4rem 1.5rem 1.5rem;
+            overflow-y: auto;
+        }
+        
+        .side-menu.open {
+            right: 0;
+        }
+        
+        .side-menu ul {
+            list-style: none;
+        }
+        
+        .side-menu ul li {
+            margin-bottom: 1rem;
+        }
+        
+        .side-menu ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 1.1rem;
+            display: block;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            transition: color 0.3s ease;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .side-menu ul li a:hover {
+            color: var(--blue);
+        }
+        
+        .side-menu .close-btn {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            font-size: 1.25rem;
+            cursor: pointer;
+            color: var(--blue);
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
         
         /* Hero Slider */
@@ -263,19 +371,19 @@
             color: var(--dark-blue);
         }
         
-        /* Course Categories Section */
-        .course-categories {
+        /* Popular Courses Section */
+        .popular-courses {
             padding: 4rem 0;
             background-color: var(--white);
         }
         
-        .categories-container {
+        .courses-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
         }
         
-        .category-card {
+        .course-card {
             background-color: var(--light-gray);
             border-radius: 8px;
             overflow: hidden;
@@ -283,28 +391,35 @@
             transition: transform 0.3s ease;
         }
         
-        .category-card:hover {
+        .course-card:hover {
             transform: translateY(-5px);
         }
         
-        .category-img {
+        .course-img {
             height: 180px;
             background-size: cover;
             background-position: center;
         }
         
-        .category-content {
+        .course-content {
             padding: 1.5rem;
         }
         
-        .category-content h3 {
+        .course-content h3 {
             margin-bottom: 1rem;
             color: var(--dark-blue);
         }
         
-        .category-content p {
+        .course-content p {
             margin-bottom: 1.5rem;
             color: var(--gray);
+        }
+        
+        .course-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--dark-blue);
+            margin-bottom: 1rem;
         }
         
         /* Platform Model Section */
@@ -477,12 +592,16 @@
         }
         
         @media (max-width: 768px) {
-            .header-left {
+            nav ul {
                 display: none;
             }
             
             .mobile-menu {
                 display: block;
+            }
+            
+            .header-left {
+                display: none;
             }
             
             .logo {
@@ -507,8 +626,33 @@
                 font-size: 1.5rem;
             }
             
-            .features-container, .categories-container, .model-container {
-                grid-template-columns: 1fr;
+            /* Two cards per row on mobile */
+            .features-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            
+            .courses-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            
+            .model-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            
+            /* Adjust card padding for smaller screens */
+            .feature-card,
+            .course-card,
+            .model-card {
+                padding: 1.5rem 1rem;
+            }
+            
+            .feature-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
             }
             
             .search-box {
@@ -527,6 +671,39 @@
             
             .slide-content {
                 padding: 1.5rem;
+            }
+            
+            /* For very small screens, ensure cards don't get too small */
+            .features-container,
+            .courses-container,
+            .model-container {
+                grid-template-columns: repeat(2, minmax(140px, 1fr));
+            }
+            
+            .feature-card h3,
+            .course-card h3,
+            .model-card h3 {
+                font-size: 1rem;
+            }
+            
+            .feature-card p,
+            .course-card p,
+            .model-card p {
+                font-size: 0.85rem;
+            }
+            
+            .btn {
+                padding: 10px 16px;
+                font-size: 0.85rem;
+            }
+        }
+        
+        /* For very small screens (below 400px) */
+        @media (max-width: 400px) {
+            .features-container,
+            .courses-container,
+            .model-container {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -558,7 +735,34 @@
                 </div>
             </div>
         </div>
+        
+        <nav>
+            <ul id="nav-menu">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="programs.html">Programs</a></li>
+                <li><a href="tutors.html">Tutors</a></li>
+                <li><a href="about-us.html">About Us</a></li>
+            </ul>
+        </nav>
     </header>
+
+    <!-- Side Menu for Mobile -->
+    <div class="side-menu" id="side-menu">
+        <div class="close-btn" id="close-menu">
+            <i class="fas fa-times"></i>
+        </div>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="programs.html">Programs</a></li>
+            <li><a href="tutors.html">Tutors</a></li>
+            <li><a href="about-us.html">About Us</a></li>
+        </ul>
+    </div>
+    
+    <!-- Overlay for mobile menu -->
+    <div class="overlay" id="overlay"></div>
 
     <!-- Hero Slider -->
     <section class="hero-slider">
@@ -572,7 +776,7 @@
                         <span><i class="far fa-clock"></i> 4 Weeks</span>
                         <span><i class="fas fa-user-graduate"></i> Beginner</span>
                     </div>
-                    <a href="#" class="btn btn-maroon">Enroll Now - KSh 3,500</a>
+                    <a href="#" class="btn btn-maroon">Add to Cart - KSh 3,500</a>
                 </div>
             </div>
             
@@ -585,7 +789,7 @@
                         <span><i class="far fa-clock"></i> 6 Weeks</span>
                         <span><i class="fas fa-user-graduate"></i> Intermediate</span>
                     </div>
-                    <a href="#" class="btn btn-maroon">Enroll Now - KSh 6,000</a>
+                    <a href="#" class="btn btn-maroon">Add to Cart - KSh 6,000</a>
                 </div>
             </div>
             
@@ -598,7 +802,7 @@
                         <span><i class="far fa-clock"></i> 4 Weeks</span>
                         <span><i class="fas fa-user-graduate"></i> All Levels</span>
                     </div>
-                    <a href="#" class="btn btn-maroon">Enroll Now - KSh 4,500</a>
+                    <a href="#" class="btn btn-maroon">Add to Cart - KSh 4,500</a>
                 </div>
             </div>
         </div>
@@ -654,39 +858,52 @@
         </div>
     </section>
 
-    <!-- Course Categories Section -->
-    <section class="course-categories">
+    <!-- Popular Courses Section -->
+    <section class="popular-courses">
         <div class="container">
             <div class="section-title">
-                <h2>Popular Course Categories</h2>
-                <p>Explore our most sought-after learning paths</p>
+                <h2>Popular Courses</h2>
+                <p>Browse our most sought-after courses</p>
             </div>
             
-            <div class="categories-container">
-                <div class="category-card">
-                    <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');"></div>
-                    <div class="category-content">
-                        <h3>Business & Finance</h3>
-                        <p>Master financial management, business strategy, and entrepreneurship skills to advance your career.</p>
-                        <a href="#" class="btn btn-outline">Explore Courses</a>
+            <div class="courses-container">
+                <div class="course-card">
+                    <div class="course-img" style="background-image: url('https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');"></div>
+                    <div class="course-content">
+                        <h3>Data Entry Mastery</h3>
+                        <p>Learn efficient data entry techniques, keyboard shortcuts, and data management skills.</p>
+                        <div class="course-price">KSh 3,500</div>
+                        <a href="#" class="btn btn-maroon">Add to Cart</a>
                     </div>
                 </div>
                 
-                <div class="category-card">
-                    <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');"></div>
-                    <div class="category-content">
-                        <h3>Technology & IT</h3>
-                        <p>Learn programming, web development, data science, and other in-demand tech skills.</p>
-                        <a href="#" class="btn btn-outline">Explore Courses</a>
+                <div class="course-card">
+                    <div class="course-img" style="background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');"></div>
+                    <div class="course-content">
+                        <h3>Financial Management</h3>
+                        <p>Master budgeting, investment strategies, and financial analysis for personal and business finances.</p>
+                        <div class="course-price">KSh 6,000</div>
+                        <a href="#" class="btn btn-maroon">Add to Cart</a>
                     </div>
                 </div>
                 
-                <div class="category-card">
-                    <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');"></div>
-                    <div class="category-content">
-                        <h3>Creative Arts</h3>
-                        <p>Develop your creative skills in design, photography, writing, and other artistic disciplines.</p>
-                        <a href="#" class="btn btn-outline">Explore Courses</a>
+                <div class="course-card">
+                    <div class="course-img" style="background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80');"></div>
+                    <div class="course-content">
+                        <h3>Online Working Mastery</h3>
+                        <p>Master the fundamentals of online work, from data entry basics to advanced online tasking.</p>
+                        <div class="course-price">KSh 4,500</div>
+                        <a href="#" class="btn btn-maroon">Add to Cart</a>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-img" style="background-image: url('https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');"></div>
+                    <div class="course-content">
+                        <h3>Web Development</h3>
+                        <p>Learn HTML, CSS, JavaScript and build responsive websites from scratch.</p>
+                        <div class="course-price">KSh 8,000</div>
+                        <a href="#" class="btn btn-maroon">Add to Cart</a>
                     </div>
                 </div>
             </div>
@@ -745,9 +962,9 @@
                     <ul>
                         <li><a href="home.html">Home</a></li>
                         <li><a href="courses.html">Courses</a></li>
+                        <li><a href="programs.html">Programs</a></li>
+                        <li><a href="tutors.html">Tutors</a></li>
                         <li><a href="about-us.html">About Us</a></li>
-                        <li><a href="#">Testimonials</a></li>
-                        <li><a href="#">Contact</a></li>
                     </ul>
                 </div>
                 
@@ -785,6 +1002,34 @@
     </footer>
 
     <script>
+        // Mobile menu functionality
+        const mobileMenu = document.getElementById('mobile-menu');
+        const sideMenu = document.getElementById('side-menu');
+        const closeMenu = document.getElementById('close-menu');
+        const overlay = document.getElementById('overlay');
+        
+        // Toggle side menu
+        mobileMenu.addEventListener('click', function() {
+            sideMenu.classList.add('open');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        // Close side menu
+        function closeSideMenu() {
+            sideMenu.classList.remove('open');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        closeMenu.addEventListener('click', closeSideMenu);
+        overlay.addEventListener('click', closeSideMenu);
+        
+        // Close menu when clicking on links
+        document.querySelectorAll('.side-menu a').forEach(link => {
+            link.addEventListener('click', closeSideMenu);
+        });
+
         // Hero Slider Functionality
         const slides = document.querySelectorAll('.slide');
         const indicators = document.querySelectorAll('.indicator');
@@ -825,12 +1070,6 @@
             indicator.addEventListener('click', () => {
                 showSlide(index);
             });
-        });
-        
-        // Mobile menu functionality (placeholder)
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenu.addEventListener('click', function() {
-            alert('Mobile menu would open here');
         });
     </script>
 </body>
