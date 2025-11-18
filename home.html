@@ -29,6 +29,7 @@
             background-color: var(--white);
             color: var(--dark);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         /* Header Styles */
@@ -852,7 +853,7 @@
             color: #aaa;
         }
 
-        /* Mobile Styles */
+        /* Mobile Styles - Fixed */
         @media (max-width: 768px) {
             .header-container {
                 padding: 1rem;
@@ -872,6 +873,10 @@
 
             .menu-toggle {
                 display: block;
+            }
+
+            .mobile-menu {
+                display: flex;
             }
 
             .hero h1 {
@@ -1798,7 +1803,7 @@
             }
         });
 
-        // Mobile menu functionality
+        // Mobile menu functionality - FIXED
         menuToggle.addEventListener('click', function() {
             mobileMenu.classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -1807,6 +1812,14 @@
         closeMenu.addEventListener('click', function() {
             mobileMenu.classList.remove('active');
             document.body.style.overflow = 'auto';
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
         });
 
         // Initialize cart
