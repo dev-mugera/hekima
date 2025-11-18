@@ -64,6 +64,39 @@
             width: auto;
         }
 
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+        }
+
         .search-bar {
             flex: 1;
             max-width: 600px;
@@ -96,6 +129,35 @@
             background: var(--secondary);
         }
 
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 10;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .search-suggestion {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+            transition: background 0.2s ease;
+        }
+
+        .search-suggestion:hover {
+            background: var(--light);
+        }
+
+        .search-suggestion:last-child {
+            border-bottom: none;
+        }
+
         .header-actions {
             display: flex;
             gap: 1.5rem;
@@ -111,6 +173,26 @@
         .cart, .auth-buttons {
             display: flex;
             gap: 1rem;
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
         }
 
         .btn {
@@ -178,6 +260,61 @@
             color: var(--primary);
         }
 
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 1000;
+            padding: 2rem;
+            flex-direction: column;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .mobile-nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .mobile-nav-links a.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .close-menu {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -205,6 +342,7 @@
         .hero-search {
             max-width: 600px;
             margin: 0 auto;
+            position: relative;
         }
 
         .hero-search input {
@@ -292,6 +430,7 @@
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
 
         .course-card:hover {
@@ -377,6 +516,117 @@
             border-radius: 3px;
             font-size: 0.8rem;
             font-weight: 600;
+        }
+
+        /* Course Detail Modal */
+        .course-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .course-detail {
+            background: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .close-course {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+            z-index: 10;
+            background: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .course-detail-header {
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .course-detail-content {
+            padding: 2rem;
+        }
+
+        .course-detail-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .course-detail-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--gray);
+        }
+
+        .course-detail-description {
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .course-detail-objectives {
+            margin-bottom: 2rem;
+        }
+
+        .course-detail-objectives h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .course-detail-objectives ul {
+            padding-left: 1.5rem;
+        }
+
+        .course-detail-objectives li {
+            margin-bottom: 0.5rem;
+        }
+
+        .course-detail-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .course-detail-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
         }
 
         /* Why Choose Us */
@@ -519,6 +769,34 @@
             font-size: 1rem;
         }
 
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            z-index: 1001;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast-success {
+            background: var(--primary);
+        }
+
         /* Footer */
         footer {
             background: var(--dark);
@@ -580,6 +858,10 @@
                 padding: 1rem;
             }
 
+            .nav-links {
+                display: none;
+            }
+
             .search-bar {
                 display: none;
             }
@@ -611,6 +893,15 @@
             .featured-courses, .categories, .why-choose {
                 padding: 2rem 1rem;
             }
+
+            .course-detail-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .course-detail-actions .btn {
+                width: 100%;
+            }
         }
 
         @media (max-width: 480px) {
@@ -637,25 +928,61 @@
                 <span>Hekima Hub</span>
             </a>
             
+            <nav class="nav-links">
+                <a href="#" class="active">Home</a>
+                <a href="#">Courses</a>
+                <a href="#">Categories</a>
+                <a href="#">Instructors</a>
+                <a href="#">About</a>
+            </nav>
+            
             <div class="search-bar">
                 <input type="text" placeholder="Search for anything" id="search-input">
                 <button id="search-button"><i class="fas fa-search"></i></button>
+                <div class="search-suggestions" id="search-suggestions">
+                    <!-- Search suggestions will be populated here -->
+                </div>
             </div>
             
             <div class="header-actions">
                 <div class="cart">
-                    <a href="#" id="cart-icon"><i class="fas fa-shopping-cart"></i></a>
+                    <a href="#" id="cart-icon" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </a>
                 </div>
                 <div class="auth-buttons">
                     <button class="btn btn-outline">Log in</button>
                     <button class="btn btn-primary">Sign up</button>
                 </div>
-                <button class="menu-toggle">
+                <button class="menu-toggle" id="menu-toggle">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
         </div>
     </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-header">
+            <a href="#" class="logo">
+                <img src="https://i.postimg.cc/zv1G6fvB/Whats-App-Image-2025-11-18-at-16-22-32-removebg-preview.webp" alt="Hekima Hub Logo" class="logo-img">
+                <span>Hekima Hub</span>
+            </a>
+            <button class="close-menu" id="close-menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="mobile-nav-links">
+            <a href="#" class="active">Home</a>
+            <a href="#">Courses</a>
+            <a href="#">Categories</a>
+            <a href="#">Instructors</a>
+            <a href="#">About</a>
+            <a href="#">Log in</a>
+            <a href="#">Sign up</a>
+        </nav>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -928,6 +1255,53 @@
         </div>
     </footer>
 
+    <!-- Course Detail Modal -->
+    <div class="course-modal" id="course-modal">
+        <div class="course-detail">
+            <span class="close-course" id="close-course">&times;</span>
+            <div class="course-detail-header" id="course-detail-header">
+                <!-- Course image will be set via JS -->
+            </div>
+            <div class="course-detail-content">
+                <h2 class="course-detail-title" id="course-detail-title">Course Title</h2>
+                <div class="course-detail-meta">
+                    <div class="meta-item">
+                        <i class="far fa-clock"></i>
+                        <span id="course-detail-duration">Duration</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-star"></i>
+                        <span id="course-detail-rating">Rating</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-users"></i>
+                        <span id="course-detail-students">Students</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-signal"></i>
+                        <span id="course-detail-level">Level</span>
+                    </div>
+                </div>
+                <div class="course-detail-description" id="course-detail-description">
+                    <!-- Course description will be set via JS -->
+                </div>
+                <div class="course-detail-objectives">
+                    <h3>What You'll Learn</h3>
+                    <ul id="course-detail-objectives">
+                        <!-- Course objectives will be set via JS -->
+                    </ul>
+                </div>
+                <div class="course-detail-actions">
+                    <div>
+                        <span class="course-detail-price" id="course-detail-price">$0.00</span>
+                        <span class="original-price" id="course-detail-original-price">$0.00</span>
+                    </div>
+                    <button class="btn btn-primary" id="add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Cart Modal -->
     <div class="cart-modal" id="cart-modal">
         <div class="cart-content">
@@ -968,11 +1342,136 @@
         </div>
     </div>
 
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message">Item added to cart!</span>
+    </div>
+
     <script>
+        // Course data with detailed information
+        const courses = {
+            'data-entry': {
+                title: 'Data Entry Mastery',
+                price: 49.99,
+                originalPrice: 79.99,
+                duration: '4 weeks',
+                rating: '4.7 (2,340 reviews)',
+                students: '12,500+ students',
+                level: 'Beginner',
+                image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+                description: 'Master the art of accurate and efficient data entry with this comprehensive course. Learn essential skills for data management, keyboard shortcuts, and productivity techniques that will make you a valuable asset in any organization.',
+                objectives: [
+                    'Understand data entry fundamentals and best practices',
+                    'Master keyboard shortcuts for increased productivity',
+                    'Learn data validation and error checking techniques',
+                    'Develop skills in spreadsheet software like Excel',
+                    'Improve typing speed and accuracy',
+                    'Understand data security and confidentiality'
+                ]
+            },
+            'personal-branding': {
+                title: 'Personal Branding',
+                price: 59.99,
+                originalPrice: 89.99,
+                duration: '4 weeks',
+                rating: '4.5 (1,876 reviews)',
+                students: '8,200+ students',
+                level: 'All Levels',
+                image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+                description: 'Build a powerful personal brand that sets you apart in your career or business. Learn how to communicate your unique value proposition and create a lasting impression.',
+                objectives: [
+                    'Define your personal brand identity',
+                    'Create a compelling personal brand statement',
+                    'Develop a consistent online presence',
+                    'Build a professional network',
+                    'Leverage social media for personal branding',
+                    'Create a personal branding action plan'
+                ]
+            },
+            'personal-finance': {
+                title: 'Personal Finance Management',
+                price: 69.99,
+                originalPrice: 99.99,
+                duration: '6 weeks',
+                rating: '4.9 (3,210 reviews)',
+                students: '15,800+ students',
+                level: 'Beginner',
+                image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+                description: 'Take control of your financial future with this comprehensive personal finance course. Learn budgeting, investing, debt management, and wealth-building strategies.',
+                objectives: [
+                    'Create and maintain a personal budget',
+                    'Understand different investment options',
+                    'Develop a debt repayment strategy',
+                    'Plan for retirement and financial independence',
+                    'Learn tax optimization strategies',
+                    'Build an emergency fund and insurance portfolio'
+                ]
+            },
+            'graphic-design': {
+                title: 'Graphic Design and Graphic Arts',
+                price: 79.99,
+                originalPrice: 119.99,
+                duration: '8 weeks',
+                rating: '4.6 (4,532 reviews)',
+                students: '22,100+ students',
+                level: 'Beginner to Intermediate',
+                image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+                description: 'Unleash your creativity with this comprehensive graphic design course. Learn design principles, color theory, typography, and how to use industry-standard tools.',
+                objectives: [
+                    'Master design principles and composition',
+                    'Understand color theory and psychology',
+                    'Learn typography fundamentals',
+                    'Create logos, brochures, and digital graphics',
+                    'Develop skills in Adobe Creative Suite',
+                    'Build a professional design portfolio'
+                ]
+            },
+            'culinary': {
+                title: 'Introduction to Culinary Mastery',
+                price: 74.99,
+                originalPrice: 109.99,
+                duration: '6 weeks',
+                rating: '4.4 (2,987 reviews)',
+                students: '9,500+ students',
+                level: 'Beginner',
+                image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+                description: 'Discover the art and science of cooking with this comprehensive culinary course. Learn fundamental techniques, flavor pairing, and presentation skills.',
+                objectives: [
+                    'Master basic knife skills and kitchen safety',
+                    'Understand cooking methods and techniques',
+                    'Learn flavor profiles and ingredient pairing',
+                    'Create balanced and nutritious meals',
+                    'Develop plating and presentation skills',
+                    'Plan and execute complete menus'
+                ]
+            }
+        };
+
+        // All available courses for search
+        const allCourses = [
+            'Data Entry Mastery',
+            'Personal Branding',
+            'Personal Finance Management',
+            'Graphic Design and Graphic Arts',
+            'Introduction to Culinary Mastery',
+            'Web Development Bootcamp',
+            'Digital Marketing Strategy',
+            'Python Programming',
+            'Data Science Fundamentals',
+            'Mobile App Development',
+            'UI/UX Design Principles',
+            'Project Management',
+            'Business Analytics',
+            'Content Writing Mastery',
+            'Social Media Marketing'
+        ];
+
         // Cart functionality
         let cart = [];
         const cartModal = document.getElementById('cart-modal');
         const cartIcon = document.getElementById('cart-icon');
+        const cartCount = document.getElementById('cart-count');
         const closeCart = document.getElementById('close-cart');
         const cartItems = document.getElementById('cart-items');
         const cartTotal = document.getElementById('cart-total');
@@ -980,64 +1479,112 @@
         const checkoutForm = document.getElementById('checkout-form');
         const whatsappCheckout = document.getElementById('whatsapp-checkout');
 
-        // Course data
-        const courses = {
-            'data-entry': {
-                title: 'Data Entry Mastery',
-                price: 49.99,
-                duration: '4 weeks'
-            },
-            'personal-branding': {
-                title: 'Personal Branding',
-                price: 59.99,
-                duration: '4 weeks'
-            },
-            'personal-finance': {
-                title: 'Personal Finance Management',
-                price: 69.99,
-                duration: '6 weeks'
-            },
-            'graphic-design': {
-                title: 'Graphic Design and Graphic Arts',
-                price: 79.99,
-                duration: '8 weeks'
-            },
-            'culinary': {
-                title: 'Introduction to Culinary Mastery',
-                price: 74.99,
-                duration: '6 weeks'
-            }
-        };
+        // Course modal elements
+        const courseModal = document.getElementById('course-modal');
+        const closeCourse = document.getElementById('close-course');
+        const courseDetailHeader = document.getElementById('course-detail-header');
+        const courseDetailTitle = document.getElementById('course-detail-title');
+        const courseDetailDuration = document.getElementById('course-detail-duration');
+        const courseDetailRating = document.getElementById('course-detail-rating');
+        const courseDetailStudents = document.getElementById('course-detail-students');
+        const courseDetailLevel = document.getElementById('course-detail-level');
+        const courseDetailDescription = document.getElementById('course-detail-description');
+        const courseDetailObjectives = document.getElementById('course-detail-objectives');
+        const courseDetailPrice = document.getElementById('course-detail-price');
+        const courseDetailOriginalPrice = document.getElementById('course-detail-original-price');
+        const addToCartBtn = document.getElementById('add-to-cart-btn');
 
-        // Add to cart functionality
+        // Search elements
+        const searchInput = document.getElementById('search-input');
+        const heroSearchInput = document.getElementById('hero-search-input');
+        const searchButton = document.getElementById('search-button');
+        const searchSuggestions = document.getElementById('search-suggestions');
+
+        // Mobile menu elements
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenu = document.getElementById('close-menu');
+
+        // Toast notification
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+
+        // Current course being viewed
+        let currentCourseId = null;
+
+        // Show course details when clicking on a course card
         document.querySelectorAll('.course-card').forEach(card => {
             card.addEventListener('click', function() {
                 const courseId = this.getAttribute('data-course');
-                const course = courses[courseId];
-                
-                // Check if course is already in cart
-                const existingItem = cart.find(item => item.id === courseId);
-                
-                if (existingItem) {
-                    existingItem.quantity += 1;
-                } else {
-                    cart.push({
-                        id: courseId,
-                        title: course.title,
-                        price: course.price,
-                        quantity: 1
-                    });
-                }
-                
-                updateCart();
-                alert(`${course.title} has been added to your cart!`);
+                currentCourseId = courseId;
+                showCourseDetails(courseId);
             });
         });
+
+        // Show course details in modal
+        function showCourseDetails(courseId) {
+            const course = courses[courseId];
+            
+            courseDetailHeader.style.backgroundImage = `url('${course.image}')`;
+            courseDetailTitle.textContent = course.title;
+            courseDetailDuration.textContent = course.duration;
+            courseDetailRating.textContent = course.rating;
+            courseDetailStudents.textContent = course.students;
+            courseDetailLevel.textContent = course.level;
+            courseDetailDescription.textContent = course.description;
+            
+            // Clear and populate objectives
+            courseDetailObjectives.innerHTML = '';
+            course.objectives.forEach(objective => {
+                const li = document.createElement('li');
+                li.textContent = objective;
+                courseDetailObjectives.appendChild(li);
+            });
+            
+            courseDetailPrice.textContent = `$${course.price}`;
+            courseDetailOriginalPrice.textContent = `$${course.originalPrice}`;
+            
+            // Show the modal
+            courseModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Add to cart from course modal
+        addToCartBtn.addEventListener('click', function() {
+            if (currentCourseId) {
+                addToCart(currentCourseId);
+            }
+        });
+
+        // Add to cart functionality
+        function addToCart(courseId) {
+            const course = courses[courseId];
+            
+            // Check if course is already in cart
+            const existingItem = cart.find(item => item.id === courseId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: courseId,
+                    title: course.title,
+                    price: course.price,
+                    quantity: 1
+                });
+            }
+            
+            updateCart();
+            showToast(`${course.title} has been added to your cart!`);
+            courseModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
 
         // Update cart display
         function updateCart() {
             cartItems.innerHTML = '';
             let total = 0;
+            let itemCount = 0;
             
             if (cart.length === 0) {
                 cartItems.innerHTML = '<p>Your cart is empty</p>';
@@ -1045,6 +1592,7 @@
                 cart.forEach(item => {
                     const itemTotal = item.price * item.quantity;
                     total += itemTotal;
+                    itemCount += item.quantity;
                     
                     const cartItem = document.createElement('div');
                     cartItem.className = 'cart-item';
@@ -1070,30 +1618,53 @@
             }
             
             cartTotal.textContent = `$${total.toFixed(2)}`;
+            cartCount.textContent = itemCount;
+        }
+
+        // Show toast notification
+        function showToast(message) {
+            toastMessage.textContent = message;
+            toast.classList.add('show', 'toast-success');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
         }
 
         // Cart modal controls
         cartIcon.addEventListener('click', function(e) {
             e.preventDefault();
             cartModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         });
 
         closeCart.addEventListener('click', function() {
             cartModal.style.display = 'none';
             checkoutForm.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        closeCourse.addEventListener('click', function() {
+            courseModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
         });
 
         window.addEventListener('click', function(e) {
             if (e.target === cartModal) {
                 cartModal.style.display = 'none';
                 checkoutForm.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+            if (e.target === courseModal) {
+                courseModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
             }
         });
 
         // Checkout process
         checkoutBtn.addEventListener('click', function() {
             if (cart.length === 0) {
-                alert('Your cart is empty. Please add courses before checking out.');
+                showToast('Your cart is empty. Please add courses before checking out.');
                 return;
             }
             checkoutForm.style.display = 'block';
@@ -1107,7 +1678,7 @@
             const address = document.getElementById('address').value;
             
             if (!fullName || !email || !phone || !address) {
-                alert('Please fill in all the required fields.');
+                showToast('Please fill in all the required fields.');
                 return;
             }
             
@@ -1127,52 +1698,119 @@
             const message = `Hello! I would like to purchase the following courses from Hekima Hub:%0A%0A${cartSummary}%0A%0ACustomer Details:%0AName: ${fullName}%0AEmail: ${email}%0APhone: ${phone}%0AAddress: ${address}`;
             
             // Open WhatsApp with pre-filled message
-            window.open(`https://wa.me/254784599322?text=${message}`, '_blank');
+            window.open(`https://wa.me/245784599322?text=${message}`, '_blank');
             
             // Reset cart and close modal
             cart = [];
             updateCart();
             cartModal.style.display = 'none';
             checkoutForm.style.display = 'none';
+            document.body.style.overflow = 'auto';
             
             // Reset form
             document.getElementById('full-name').value = '';
             document.getElementById('email').value = '';
             document.getElementById('phone').value = '';
             document.getElementById('address').value = '';
+            
+            showToast('Order completed successfully! Check WhatsApp to finalize your purchase.');
         });
 
-        // Search functionality
-        document.getElementById('search-button').addEventListener('click', performSearch);
-        document.getElementById('hero-search-input').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                performSearch();
-            }
-        });
-        
-        function performSearch() {
-            const searchTerm = document.getElementById('search-input').value || 
-                              document.getElementById('hero-search-input').value;
+        // Search functionality with autocomplete
+        function setupSearchInput(inputElement) {
+            inputElement.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                searchSuggestions.innerHTML = '';
+                
+                if (searchTerm.length > 0) {
+                    const filteredCourses = allCourses.filter(course => 
+                        course.toLowerCase().includes(searchTerm)
+                    );
+                    
+                    if (filteredCourses.length > 0) {
+                        searchSuggestions.style.display = 'block';
+                        
+                        filteredCourses.forEach(course => {
+                            const suggestion = document.createElement('div');
+                            suggestion.className = 'search-suggestion';
+                            suggestion.textContent = course;
+                            suggestion.addEventListener('click', function() {
+                                inputElement.value = course;
+                                searchSuggestions.style.display = 'none';
+                                performSearch(course);
+                            });
+                            searchSuggestions.appendChild(suggestion);
+                        });
+                    } else {
+                        searchSuggestions.style.display = 'none';
+                    }
+                } else {
+                    searchSuggestions.style.display = 'none';
+                }
+            });
             
+            // Hide suggestions when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!inputElement.contains(e.target) && !searchSuggestions.contains(e.target)) {
+                    searchSuggestions.style.display = 'none';
+                }
+            });
+        }
+
+        // Set up both search inputs
+        setupSearchInput(searchInput);
+        setupSearchInput(heroSearchInput);
+
+        // Perform search
+        function performSearch(searchTerm) {
             if (searchTerm.trim() !== '') {
-                alert(`Searching for: "${searchTerm}". In a full implementation, this would filter courses.`);
+                // In a real implementation, this would filter courses
+                showToast(`Searching for: "${searchTerm}"`);
+                
+                // For demo purposes, if the search matches a course, open its details
+                const courseId = Object.keys(courses).find(id => 
+                    courses[id].title.toLowerCase() === searchTerm.toLowerCase()
+                );
+                
+                if (courseId) {
+                    showCourseDetails(courseId);
+                }
             } else {
-                alert('Please enter a search term.');
+                showToast('Please enter a search term.');
             }
         }
 
-        // Mobile menu toggle
-        document.querySelector('.menu-toggle').addEventListener('click', function() {
-            alert('Mobile menu would open here. In a real implementation, this would toggle a navigation drawer.');
+        // Search button click
+        searchButton.addEventListener('click', function() {
+            performSearch(searchInput.value);
         });
-        
-        // Add some interactivity to category cards
-        document.querySelectorAll('.category-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const categoryName = this.querySelector('h3').textContent;
-                alert(`You clicked on ${categoryName}. This would navigate to the category page.`);
-            });
+
+        // Enter key in search inputs
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch(this.value);
+            }
         });
+
+        heroSearchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch(this.value);
+            }
+        });
+
+        // Mobile menu functionality
+        menuToggle.addEventListener('click', function() {
+            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeMenu.addEventListener('click', function() {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Initialize cart
+        updateCart();
     </script>
 </body>
 </html>
