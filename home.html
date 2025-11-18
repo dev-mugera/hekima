@@ -498,11 +498,11 @@
             transform: translateY(-2px);
         }
         
-        /* Hero Slider */
+        /* Hero Slider - Improved Styling */
         .hero-slider {
             margin-top: 80px;
             position: relative;
-            height: 500px;
+            height: 600px;
             overflow: hidden;
         }
         
@@ -530,28 +530,50 @@
         }
         
         .slide-content {
-            max-width: 600px;
-            padding: 2rem;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 8px;
+            max-width: 650px;
+            padding: 3rem;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
             margin-left: 10%;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-left: 5px solid var(--maroon);
         }
         
         .slide-content h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
             color: var(--dark-blue);
+            line-height: 1.2;
         }
         
         .slide-content p {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             color: var(--gray);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .course-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .course-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+        
+        .course-meta i {
+            color: var(--blue);
         }
         
         .slide-indicators {
             position: absolute;
-            bottom: 20px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -559,18 +581,20 @@
         }
         
         .indicator {
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
             background-color: rgba(255, 255, 255, 0.5);
             cursor: pointer;
+            transition: all 0.3s ease;
         }
         
         .indicator.active {
             background-color: var(--white);
+            transform: scale(1.2);
         }
         
-        /* Why Choose Us Section */
+        /* Why Choose Us Section - 2 cards per row */
         .why-choose-us {
             padding: 4rem 0;
             background-color: var(--light-gray);
@@ -601,7 +625,7 @@
         
         .features-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
         }
         
@@ -636,7 +660,7 @@
             color: var(--dark-blue);
         }
         
-        /* Popular Courses Section */
+        /* Popular Courses Section - 1 card per row */
         .popular-courses {
             padding: 4rem 0;
             background-color: var(--white);
@@ -987,21 +1011,21 @@
             }
             
             .hero-slider {
-                height: 400px;
+                height: 500px;
             }
             
             .slide-content {
                 margin-left: 5%;
                 max-width: 90%;
+                padding: 2rem;
             }
             
             .slide-content h2 {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
             }
             
             .features-container {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
+                grid-template-columns: 1fr;
             }
             
             .course-main {
@@ -1049,15 +1073,11 @@
             }
             
             .hero-slider {
-                height: 350px;
+                height: 450px;
             }
             
             .slide-content {
                 padding: 1.5rem;
-            }
-            
-            .features-container {
-                grid-template-columns: 1fr;
             }
             
             .course-meta {
@@ -1114,7 +1134,7 @@
             <div class="container">
                 <div class="mobile-search-box">
                     <i class="fas fa-search search-icon"></i>
-                    <input type="text" placeholder="Search for courses...">
+                    <input type="text" placeholder="Search for courses..." id="mobile-search-input">
                 </div>
             </div>
         </div>
@@ -1173,18 +1193,22 @@
                 <div class="checkout-section">
                     <h3>Personal Information</h3>
                     <div class="form-group">
-                        <label for="full-name">Full Name</label>
+                        <label for="full-name">Full Name *</label>
                         <input type="text" id="full-name" name="full-name" required>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="email">Email Address</label>
+                            <label for="email">Email Address *</label>
                             <input type="email" id="email" name="email" required>
                         </div>
                         <div class="form-group">
-                            <label for="phone">Phone Number</label>
+                            <label for="phone">Phone Number *</label>
                             <input type="tel" id="phone" name="phone" required>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location *</label>
+                        <input type="text" id="location" name="location" required>
                     </div>
                 </div>
                 
@@ -1196,9 +1220,27 @@
                 </div>
                 
                 <div class="checkout-section">
+                    <h3>Learning Preferences</h3>
+                    <div class="form-group">
+                        <label for="preferred-schedule">Preferred Learning Schedule</label>
+                        <select id="preferred-schedule" name="preferred-schedule">
+                            <option value="">Select your preference</option>
+                            <option value="weekday-mornings">Weekday Mornings</option>
+                            <option value="weekday-evenings">Weekday Evenings</option>
+                            <option value="weekends">Weekends</option>
+                            <option value="flexible">Flexible</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="learning-goals">Learning Goals & Expectations</label>
+                        <textarea id="learning-goals" name="learning-goals" rows="3" placeholder="Tell us about your learning goals and what you hope to achieve..."></textarea>
+                    </div>
+                </div>
+                
+                <div class="checkout-section">
                     <h3>Payment Method</h3>
                     <div class="form-group">
-                        <label for="payment-method">Select Payment Method</label>
+                        <label for="payment-method">Select Payment Method *</label>
                         <select id="payment-method" name="payment-method" required>
                             <option value="">Choose an option</option>
                             <option value="mpesa">M-Pesa</option>
@@ -1207,16 +1249,8 @@
                         </select>
                     </div>
                     <div class="form-group" id="mpesa-details" style="display: none;">
-                        <label for="mpesa-number">M-Pesa Number</label>
+                        <label for="mpesa-number">M-Pesa Number *</label>
                         <input type="tel" id="mpesa-number" name="mpesa-number">
-                    </div>
-                </div>
-                
-                <div class="checkout-section">
-                    <h3>Additional Information</h3>
-                    <div class="form-group">
-                        <label for="notes">Additional Notes (Optional)</label>
-                        <textarea id="notes" name="notes" rows="3"></textarea>
                     </div>
                 </div>
                 
@@ -1227,45 +1261,48 @@
         </div>
     </div>
 
-    <!-- Hero Slider -->
+    <!-- Hero Slider - Improved Styling -->
     <section class="hero-slider">
         <div class="slider-container">
             <!-- Slide 1 -->
             <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');">
                 <div class="slide-content">
-                    <h2>Data Entry Mastery</h2>
-                    <p>Learn efficient data entry techniques, keyboard shortcuts, and data management skills to boost your productivity and accuracy in today's data-driven workplace.</p>
+                    <h2>Master Data Entry Skills for Career Success</h2>
+                    <p>Learn efficient data entry techniques, keyboard shortcuts, and data management skills to boost your productivity and accuracy in today's data-driven workplace. Perfect for beginners looking to start a career in data management.</p>
                     <div class="course-meta">
                         <span><i class="far fa-clock"></i> 4 Weeks</span>
-                        <span><i class="fas fa-user-graduate"></i> Beginner</span>
+                        <span><i class="fas fa-user-graduate"></i> Beginner Level</span>
+                        <span><i class="fas fa-chalkboard-teacher"></i> Instructor-Led</span>
                     </div>
-                    <a href="#" class="btn btn-maroon" data-course-id="1" data-course-name="Data Entry Mastery" data-course-price="3500">Add to Cart - KSh 3,500</a>
+                    <a href="#" class="btn btn-maroon add-to-cart-hero" data-course-id="1" data-course-name="Data Entry Mastery" data-course-price="3500">Add to Cart - KSh 3,500</a>
                 </div>
             </div>
             
             <!-- Slide 2 -->
             <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');">
                 <div class="slide-content">
-                    <h2>Financial Management</h2>
-                    <p>Master budgeting, investment strategies, and financial analysis to make informed decisions for personal and business finances. Learn from industry experts.</p>
+                    <h2>Financial Management for Personal & Business Success</h2>
+                    <p>Master budgeting, investment strategies, and financial analysis to make informed decisions for personal and business finances. Learn from industry experts with real-world experience in financial planning.</p>
                     <div class="course-meta">
                         <span><i class="far fa-clock"></i> 6 Weeks</span>
-                        <span><i class="fas fa-user-graduate"></i> Intermediate</span>
+                        <span><i class="fas fa-user-graduate"></i> Intermediate Level</span>
+                        <span><i class="fas fa-chalkboard-teacher"></i> Instructor-Led</span>
                     </div>
-                    <a href="#" class="btn btn-maroon" data-course-id="2" data-course-name="Financial Management" data-course-price="6000">Add to Cart - KSh 6,000</a>
+                    <a href="#" class="btn btn-maroon add-to-cart-hero" data-course-id="2" data-course-name="Financial Management" data-course-price="6000">Add to Cart - KSh 6,000</a>
                 </div>
             </div>
             
             <!-- Slide 3 -->
             <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80');">
                 <div class="slide-content">
-                    <h2>Online Working Mastery</h2>
-                    <p>Master the fundamentals of online work, from data entry basics to advanced online tasking strategies that will help you succeed in the digital workspace.</p>
+                    <h2>Online Working Mastery for the Digital Age</h2>
+                    <p>Master the fundamentals of online work, from data entry basics to advanced online tasking strategies that will help you succeed in the digital workspace. Perfect for remote workers, freelancers, and digital entrepreneurs.</p>
                     <div class="course-meta">
                         <span><i class="far fa-clock"></i> 4 Weeks</span>
                         <span><i class="fas fa-user-graduate"></i> All Levels</span>
+                        <span><i class="fas fa-user-clock"></i> Self-Paced</span>
                     </div>
-                    <a href="#" class="btn btn-maroon" data-course-id="3" data-course-name="Online Working Mastery" data-course-price="4500">Add to Cart - KSh 4,500</a>
+                    <a href="#" class="btn btn-maroon add-to-cart-hero" data-course-id="3" data-course-name="Online Working Mastery" data-course-price="4500">Add to Cart - KSh 4,500</a>
                 </div>
             </div>
         </div>
@@ -1277,7 +1314,7 @@
         </div>
     </section>
 
-    <!-- Why Choose Us Section -->
+    <!-- Why Choose Us Section - 2 cards per row -->
     <section class="why-choose-us">
         <div class="container">
             <div class="section-title">
@@ -1321,7 +1358,7 @@
         </div>
     </section>
 
-    <!-- Popular Courses Section -->
+    <!-- Popular Courses Section - 1 card per row -->
     <section class="popular-courses">
         <div class="container">
             <div class="section-title">
@@ -1619,6 +1656,7 @@
         const whatsappCheckout = document.getElementById('whatsapp-checkout');
         const paymentMethod = document.getElementById('payment-method');
         const mpesaDetails = document.getElementById('mpesa-details');
+        const mobileSearchInput = document.getElementById('mobile-search-input');
         
         // Mobile menu functionality
         const mobileMenu = document.getElementById('mobile-menu');
@@ -1647,7 +1685,9 @@
         
         // Close menu when clicking on links
         document.querySelectorAll('.side-menu a').forEach(link => {
-            link.addEventListener('click', closeSideMenu);
+            if (link.id !== 'mobile-search-toggle') {
+                link.addEventListener('click', closeSideMenu);
+            }
         });
         
         // Toggle mobile search
@@ -1655,6 +1695,27 @@
             e.preventDefault();
             mobileSearch.classList.toggle('active');
             closeSideMenu();
+            
+            // Focus on search input when opened
+            if (mobileSearch.classList.contains('active')) {
+                setTimeout(() => {
+                    mobileSearchInput.focus();
+                }, 300);
+            }
+        });
+        
+        // Close mobile search when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!mobileSearch.contains(e.target) && !mobileSearchToggle.contains(e.target) && mobileSearch.classList.contains('active')) {
+                mobileSearch.classList.remove('active');
+            }
+        });
+        
+        // Close mobile search when pressing escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mobileSearch.classList.contains('active')) {
+                mobileSearch.classList.remove('active');
+            }
         });
         
         // Hero Slider Functionality
@@ -1713,7 +1774,7 @@
         }
         
         // Add to cart functionality
-        document.querySelectorAll('.add-to-cart').forEach(button => {
+        document.querySelectorAll('.add-to-cart, .add-to-cart-hero').forEach(button => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -1868,10 +1929,7 @@
             checkoutSummary.appendChild(summaryTotal);
             
             // Update WhatsApp checkout link
-            const coursesText = cart.map(item => `${item.name} (x${item.quantity})`).join(', ');
-            const message = `Hello! I would like to purchase the following courses from Hekima Hub: ${coursesText}. Total: KSh ${totalPrice.toLocaleString()}.`;
-            whatsappCheckout.href = `https://wa.me/254784599322?text=${encodeURIComponent(message)}`;
-            whatsappCheckout.style.display = 'block';
+            updateWhatsAppLink();
         }
         
         // Payment method change
@@ -1883,18 +1941,22 @@
             }
         });
         
-        // Form submission
-        checkoutForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
+        // Update WhatsApp link when form changes
+        checkoutForm.addEventListener('input', updateWhatsAppLink);
+        checkoutForm.addEventListener('change', updateWhatsAppLink);
+        
+        // Update WhatsApp checkout link with complete information
+        function updateWhatsAppLink() {
             // Get form data
-            const formData = new FormData(this);
-            const fullName = formData.get('full-name');
-            const email = formData.get('email');
-            const phone = formData.get('phone');
-            const paymentMethodValue = formData.get('payment-method');
-            const mpesaNumber = formData.get('mpesa-number');
-            const notes = formData.get('notes');
+            const formData = new FormData(checkoutForm);
+            const fullName = formData.get('full-name') || '';
+            const email = formData.get('email') || '';
+            const phone = formData.get('phone') || '';
+            const location = formData.get('location') || '';
+            const preferredSchedule = formData.get('preferred-schedule') || '';
+            const learningGoals = formData.get('learning-goals') || '';
+            const paymentMethodValue = formData.get('payment-method') || '';
+            const mpesaNumber = formData.get('mpesa-number') || '';
             
             // Calculate total
             let totalPrice = 0;
@@ -1904,25 +1966,93 @@
                 return `${item.name} (x${item.quantity}) - KSh ${itemTotal.toLocaleString()}`;
             }).join('%0A');
             
-            // Create WhatsApp message
-            let message = `*HEKIMA HUB COURSE PURCHASE*%0A%0A`;
-            message += `*Customer Information:*%0A`;
+            // Create WhatsApp message with complete information
+            let message = `*HEKIMA HUB COURSE ENROLLMENT REQUEST*%0A%0A`;
+            message += `*CUSTOMER INFORMATION*%0A`;
             message += `Name: ${fullName}%0A`;
             message += `Email: ${email}%0A`;
-            message += `Phone: ${phone}%0A%0A`;
-            message += `*Course Selection:*%0A${coursesText}%0A%0A`;
-            message += `*Total Amount:* KSh ${totalPrice.toLocaleString()}%0A%0A`;
-            message += `*Payment Method:* ${paymentMethodValue}%0A`;
+            message += `Phone: ${phone}%0A`;
+            message += `Location: ${location}%0A%0A`;
             
+            message += `*COURSE SELECTION*%0A${coursesText}%0A%0A`;
+            message += `*TOTAL AMOUNT:* KSh ${totalPrice.toLocaleString()}%0A%0A`;
+            
+            message += `*LEARNING PREFERENCES*%0A`;
+            message += `Preferred Schedule: ${preferredSchedule || 'Not specified'}%0A`;
+            if (learningGoals) {
+                message += `Learning Goals: ${learningGoals}%0A`;
+            }
+            message += `%0A`;
+            
+            message += `*PAYMENT METHOD*%0A`;
+            message += `Selected: ${paymentMethodValue}%0A`;
             if (paymentMethodValue === 'mpesa' && mpesaNumber) {
                 message += `M-Pesa Number: ${mpesaNumber}%0A`;
             }
+            message += `%0A`;
             
-            if (notes) {
-                message += `*Additional Notes:*%0A${notes}%0A%0A`;
+            message += `I'm ready to enroll and complete my purchase! Please provide payment details and next steps.`;
+            
+            // Update WhatsApp checkout link
+            whatsappCheckout.href = `https://wa.me/254784599322?text=${message}`;
+            whatsappCheckout.style.display = 'block';
+        }
+        
+        // Form submission
+        checkoutForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const fullName = formData.get('full-name');
+            const email = formData.get('email');
+            const phone = formData.get('phone');
+            const location = formData.get('location');
+            const preferredSchedule = formData.get('preferred-schedule');
+            const learningGoals = formData.get('learning-goals');
+            const paymentMethodValue = formData.get('payment-method');
+            const mpesaNumber = formData.get('mpesa-number');
+            
+            // Validate required fields
+            if (!fullName || !email || !phone || !location || !paymentMethodValue) {
+                alert('Please fill in all required fields marked with *');
+                return;
             }
             
-            message += `I'm ready to complete my purchase!`;
+            // Calculate total
+            let totalPrice = 0;
+            const coursesText = cart.map(item => {
+                const itemTotal = item.price * item.quantity;
+                totalPrice += itemTotal;
+                return `${item.name} (x${item.quantity}) - KSh ${itemTotal.toLocaleString()}`;
+            }).join('%0A');
+            
+            // Create WhatsApp message with complete information
+            let message = `*HEKIMA HUB COURSE ENROLLMENT REQUEST*%0A%0A`;
+            message += `*CUSTOMER INFORMATION*%0A`;
+            message += `Name: ${fullName}%0A`;
+            message += `Email: ${email}%0A`;
+            message += `Phone: ${phone}%0A`;
+            message += `Location: ${location}%0A%0A`;
+            
+            message += `*COURSE SELECTION*%0A${coursesText}%0A%0A`;
+            message += `*TOTAL AMOUNT:* KSh ${totalPrice.toLocaleString()}%0A%0A`;
+            
+            message += `*LEARNING PREFERENCES*%0A`;
+            message += `Preferred Schedule: ${preferredSchedule || 'Not specified'}%0A`;
+            if (learningGoals) {
+                message += `Learning Goals: ${learningGoals}%0A`;
+            }
+            message += `%0A`;
+            
+            message += `*PAYMENT METHOD*%0A`;
+            message += `Selected: ${paymentMethodValue}%0A`;
+            if (paymentMethodValue === 'mpesa' && mpesaNumber) {
+                message += `M-Pesa Number: ${mpesaNumber}%0A`;
+            }
+            message += `%0A`;
+            
+            message += `I'm ready to enroll and complete my purchase! Please provide payment details and next steps.`;
             
             // Open WhatsApp with pre-filled message
             window.open(`https://wa.me/254784599322?text=${message}`, '_blank');
@@ -1935,7 +2065,7 @@
             updateCart();
             
             // Show success message
-            alert('Thank you for your purchase! You will be redirected to WhatsApp to complete your order.');
+            alert('Thank you for your purchase! You will be redirected to WhatsApp to complete your enrollment.');
         });
         
         // Initialize cart
