@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=5.0, user-scalable=yes">
+    <title>Data Entry Mastery - Premium Learning Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        :root {
+            --primary: #2E8B57;
+            --primary-dark: #26734d;
+            --secondary: #4169E1;
+            --accent: #FF6B35;
+            --light: #f8f9fa;
+            --dark: #1a202c;
+            --gray: #718096;
+            --success: #38a169;
+            --warning: #ed8936;
+            --border-radius: 12px;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        /* Premium Header */
+        .premium-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2.5rem 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .premium-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><polygon points="50,0 100,50 50,100 0,50" fill="white"/></svg>');
+            background-size: 80px;
+        }
+
+        .course-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .course-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .badge {
+            background: var(--accent);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: inline-block;
+        }
+
+        /* Modules Grid */
+        .modules-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .module-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .module-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+
+        .module-header {
+            background: linear-gradient(135deg, var(--light), white);
+            padding: 1.5rem;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .module-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .module-meta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .module-duration {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .module-content {
+            padding: 1.5rem;
+        }
+
+        /* Premium Video Player */
+        .video-player-container {
+            margin-bottom: 1.5rem;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            background: var(--dark);
+            position: relative;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .video-player {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            border: none;
+            display: block;
+        }
+
+        .video-info {
+            padding: 1rem;
+            background: white;
+        }
+
+        .video-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .video-description {
+            font-size: 0.9rem;
+            color: var(--gray);
+            line-height: 1.5;
+        }
+
+        /* Videos Grid */
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Resources Section */
+        .resources-section {
+            background: linear-gradient(135deg, #f0f7ff, #e6f3ff);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-top: 1.5rem;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .resources-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .resource-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--dark);
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .resource-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .resource-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .resource-info h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .resource-info p {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        /* Classroom Link */
+        .classroom-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(46, 139, 87, 0.3);
+        }
+
+        .classroom-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(46, 139, 87, 0.4);
+        }
+
+        /* Progress Tracker */
+        .progress-section {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin-top: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .progress-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            transition: width 1s ease;
+            width: 0%;
+        }
+
+        .progress-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        /* Enhanced Video Loading */
+        .video-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, #2d3748, #4a5568);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 12px;
+            }
+            
+            .videos-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .course-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 13px;
+            }
+            
+            .premium-header {
+                padding: 2rem 1.5rem;
+            }
+            
+            .course-title {
+                font-size: 1.6rem;
+            }
+            
+            .module-header {
+                padding: 1.25rem;
+            }
+            
+            .module-content {
+                padding: 1.25rem;
+            }
+            
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .premium-header {
+                padding: 1.5rem 1rem;
+            }
+            
+            .course-title {
+                font-size: 1.4rem;
+            }
+            
+            .module-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Focus states for accessibility */
+        button:focus, 
+        .resource-item:focus, 
+        .classroom-link:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Premium Header -->
+        <div class="premium-header">
+            <h1 class="course-title">Data Entry Mastery</h1>
+            <p class="course-subtitle">Transform from Beginner to Proficient Data Entry Specialist</p>
+            <span class="badge">Premium Course</span>
+        </div>
+
+        <!-- Modules Grid -->
+        <div class="modules-grid">
+            <!-- Module 1 -->
+            <div class="module-card">
+                <div class="module-header">
+                    <h2 class="module-title">Module 1: Data Entry Fundamentals</h2>
+                    <div class="module-meta">
+                        <span class="module-duration">⏱ 2 Hours</span>
+                        <span>•</span>
+                        <span>🎯 4 Videos</span>
+                        <span>•</span>
+                        <span>📊 Beginner Level</span>
+                    </div>
+                </div>
+                <div class="module-content">
+                    <p style="color: var(--gray); margin-bottom: 1.5rem; font-size: 0.95rem;">
+                        Master the essential foundations of data entry, keyboard efficiency, and core concepts that every professional needs.
+                    </p>
+                    
+                    <div class="videos-grid">
+                        <!-- Video 1 -->
+                        <div class="video-item">
+                            <div class="video-player-container">
+                                <iframe 
+                                    class="video-player"
+                                    src="https://drive.google.com/file/d/1x3_xdSjn5aeOP-L8SuRE9FoVDUNT6QIp7QCcvee-O4c/preview"
+                                    allow="autoplay; encrypted-media"
+                                    allowfullscreen
+                                    loading="lazy">
+                                </iframe>
+                            </div>
+                            <div class="video-info">
+                                <h3 class="video-title">1.1 Introduction to Professional Data Entry</h3>
+                                <p class="video-description">
+                                    Understand the data entry industry, career opportunities, and essential skills needed for success.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Video 2 -->
+                        <div class="video-item">
+                            <div class="video-player-container">
+                                <iframe 
+                                    class="video-player"
+                                    src="https://drive.google.com/file/d/YOUR_VIDEO_ID_2/preview"
+                                    allow="autoplay; encrypted-media"
+                                    allowfullscreen
+                                    loading="lazy">
+                                </iframe>
+                            </div>
+                            <div class="video-info">
+                                <h3 class="video-title">1.2 Keyboard Mastery & Shortcuts</h3>
+                                <p class="video-description">
+                                    Learn essential keyboard shortcuts and techniques to dramatically increase your data entry speed.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resources -->
+                    <div class="resources-section">
+                        <h3 class="resources-title">
+                            <span style="background: var(--secondary); color: white; width: 24px; height: 24px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem;">📚</span>
+                            Learning Resources
+                        </h3>
+                        <div class="resources-grid">
+                            <a href="#" class="resource-item">
+                                <div class="resource-icon">📋</div>
+                                <div class="resource-info">
+                                    <h4>Shortcuts Cheat Sheet</h4>
+                                    <p>PDF Download</p>
+                                </div>
+                            </a>
+                            <a href="#" class="resource-item">
+                                <div class="resource-icon">📝</div>
+                                <div class="resource-info">
+                                    <h4>Practice Exercises</h4>
+                                    <p>Interactive Files</p>
+                                </div>
+                            </a>
+                            <a href="#" class="resource-item">
+                                <div class="resource-icon">📊</div>
+                                <div class="resource-info">
+                                    <h4>Data Templates</h4>
+                                    <p>Ready-to-Use</p>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <a href="YOUR_GOOGLE_CLASSROOM_LINK_1" class="classroom-link" target="_blank">
+                            <span>🏫</span>
+                            Start Module 1 Assignment
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 2 -->
+            <div class="module-card">
+                <div class="module-header">
+                    <h2 class="module-title">Module 2: Software Tools Mastery</h2>
+                    <div class="module-meta">
+                        <span class="module-duration">⏱ 3 Hours</span>
+                        <span>•</span>
+                        <span>🎯 4 Videos</span>
+                        <span>•</span>
+                        <span>💻 Intermediate Level</span>
+                    </div>
+                </div>
+                <div class="module-content">
+                    <p style="color: var(--gray); margin-bottom: 1.5rem; font-size: 0.95rem;">
+                        Become proficient in essential data entry software including Excel, Google Sheets, and database management tools.
+                    </p>
+                    
+                    <div class="videos-grid">
+                        <!-- Video 3 -->
+                        <div class="video-item">
+                            <div class="video-player-container">
+                                <iframe 
+                                    class="video-player"
+                                    src="https://drive.google.com/file/d/YOUR_VIDEO_ID_3/preview"
+                                    allow="autoplay; encrypted-media"
+                                    allowfullscreen
+                                    loading="lazy">
+                                </iframe>
+                            </div>
+                            <div class="video-info">
+                                <h3 class="video-title">2.1 Excel for Data Professionals</h3>
+                                <p class="video-description">
+                                    Master Excel functions, formulas, and data manipulation techniques used by professionals.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Video 4 -->
+                        <div class="video-item">
+                            <div class="video-player-container">
+                                <iframe 
+                                    class="video-player"
+                                    src="https://drive.google.com/file/d/YOUR_VIDEO_ID_4/preview"
+                                    allow="autoplay; encrypted-media"
+                                    allowfullscreen
+                                    loading="lazy">
+                                </iframe>
+                            </div>
+                            <div class="video-info">
+                                <h3 class="video-title">2.2 Google Sheets Collaboration</h3>
+                                <p class="video-description">
+                                    Learn to work efficiently with Google Sheets for team collaboration and real-time data entry.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resources -->
+                    <div class="resources-section">
+                        <h3 class="resources-title">
+                            <span style="background: var(--secondary); color: white; width: 24px; height: 24px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem;">📚</span>
+                            Software Resources
+                        </h3>
+                        <div class="resources-grid">
+                            <a href="#" class="resource-item">
+                                <div class="resource-icon">📊</div>
+                                <div class="resource-info">
+                                    <h4>Excel Templates</h4>
+                                    <p>Professional Sheets</p>
+                                </div>
+                            </a>
+                            <a href="#" class="resource-item">
+                                <div class="resource-icon">🔧</div>
+                                <div class="resource-info">
+                                    <h4>Tool Guide</h4>
+                                    <p>Software Overview</p>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <a href="YOUR_GOOGLE_CLASSROOM_LINK_2" class="classroom-link" target="_blank">
+                            <span>🏫</span>
+                            Start Module 2 Assignment
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Tracker -->
+        <div class="progress-section">
+            <div class="progress-header">
+                <h3 class="progress-title">Your Learning Progress</h3>
+                <span id="progress-percentage">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div class="progress-stats">
+                <span>Completed: <span id="completed-videos">0</span>/8 videos</span>
+                <span>Estimated time remaining: <span id="time-remaining">6 hours</span></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced progress tracking
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressFill = document.getElementById('progress-fill');
+            const progressPercentage = document.getElementById('progress-percentage');
+            const completedVideos = document.getElementById('completed-videos');
+            const timeRemaining = document.getElementById('time-remaining');
+            
+            // Initialize progress
+            function initializeProgress() {
+                const watchedVideos = JSON.parse(localStorage.getItem('watchedVideos') || '[]');
+                const totalVideos = 8;
+                const progress = (watchedVideos.length / totalVideos) * 100;
+                
+                progressFill.style.width = progress + '%';
+                progressPercentage.textContent = Math.round(progress) + '%';
+                completedVideos.textContent = watchedVideos.length;
+                
+                // Calculate estimated time remaining
+                const remainingHours = Math.round((totalVideos - watchedVideos.length) * 0.75);
+                timeRemaining.textContent = `${remainingHours} hours`;
+            }
+            
+            // Track video views
+            function setupVideoTracking() {
+                const videoIframes = document.querySelectorAll('.video-player');
+                
+                videoIframes.forEach((iframe, index) => {
+                    // Add click tracking for video containers
+                    const videoContainer = iframe.closest('.video-item');
+                    videoContainer.addEventListener('click', function() {
+                        const videoTitle = this.querySelector('.video-title').textContent;
+                        markVideoAsWatched(videoTitle);
+                    });
+                });
+            }
+            
+            function markVideoAsWatched(videoTitle) {
+                let watchedVideos = JSON.parse(localStorage.getItem('watchedVideos') || '[]');
+                
+                if (!watchedVideos.includes(videoTitle)) {
+                    watchedVideos.push(videoTitle);
+                    localStorage.setItem('watchedVideos', JSON.stringify(watchedVideos));
+                    initializeProgress();
+                    
+                    // Show subtle confirmation
+                    const progressFill = document.getElementById('progress-fill');
+                    progressFill.style.background = 'linear-gradient(90deg, var(--success), var(--primary))';
+                    setTimeout(() => {
+                        progressFill.style.background = 'linear-gradient(90deg, var(--primary), var(--secondary))';
+                    }, 1000);
+                }
+            }
+            
+            // Initialize everything
+            initializeProgress();
+            setupVideoTracking();
+            
+            // Add loading states for videos
+            const videoIframes = document.querySelectorAll('.video-player');
+            videoIframes.forEach(iframe => {
+                iframe.addEventListener('load', function() {
+                    this.style.opacity = '1';
+                });
+                
+                iframe.style.opacity = '0';
+                iframe.style.transition = 'opacity 0.3s ease';
+            });
+        });
+    </script>
+</body>
+</html>
