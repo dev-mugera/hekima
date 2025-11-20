@@ -1588,18 +1588,6 @@
 
         // WhatsApp Checkout
         function processWhatsAppCheckout() {
-            const phone = phoneInput.value.trim();
-            const address = addressInput.value.trim();
-            
-            if (!phone) {
-                showToast('Please enter your phone number.');
-                return;
-            }
-            
-            if (!address) {
-                showToast('Please enter your delivery address.');
-                return;
-            }
 
             // Format cart items for message
             let cartSummary = '🎓 *HEKIMA HUB ORDER SUMMARY* 🎓%0A%0A';
@@ -1617,7 +1605,7 @@
             
             // Customer details
             const customerDetails = `👤 *CUSTOMER DETAILS*%0A`;
-            const customerInfo = `Name: ${currentUser.name}%0AEmail: ${currentUser.email}%0APhone: ${phone}%0AAddress: ${address}%0A%0A`;
+            const customerInfo = `Name: ${currentUser.name}%0AEmail: ${currentUser.email}`;
             
             const finalMessage = `${cartSummary}${customerDetails}${customerInfo}Please confirm this order and provide payment instructions.`;
             
@@ -1632,8 +1620,6 @@
             document.body.style.overflow = 'auto';
             
             // Reset form
-            phoneInput.value = '';
-            addressInput.value = '';
             
             showToast('Order completed successfully! Check WhatsApp to finalize your purchase.');
             localStorage.removeItem('userCart');
