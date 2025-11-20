@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Course Categories - Hekima Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        :root {
+            --primary: #2E8B57;
+            --primary-dark: #26734d;
+            --secondary: #4169E1;
+            --accent: #800000;
+            --highlight: #FFD700;
+            --dark: #1c1d1f;
+            --light: #f7f9fa;
+            --gray: #6a6f73;
+            --success: #1e6055;
+            --white: #ffffff;
+            --border-radius: 12px;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            font-size: 14px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        /* Header - Matching Homepage Style */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            margin-bottom: 2rem;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 600px;
+            margin: 0 2rem;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            font-size: 1rem;
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 7px 15px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background: var(--secondary);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: nowrap;
+        }
+
+        .cart, .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .cart-icon {
+            position: relative;
+            color: var(--dark);
+            text-decoration: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 1000;
+            padding: 2rem;
+            flex-direction: column;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .mobile-nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .mobile-nav-links a.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .close-menu {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* Auth Elements */
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .user-menu {
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .user-avatar:hover {
+            transform: scale(1.05);
+        }
+
+        .user-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 1rem;
+            min-width: 200px;
+            z-index: 1000;
+            margin-top: 0.5rem;
+        }
+
+        .user-dropdown.active {
+            display: block;
+        }
+
+        .user-dropdown-info {
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 0.75rem;
+        }
+
+        .user-dropdown-name {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .user-dropdown-email {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .logout-btn {
+            background: none;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .logout-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Auth Modal */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .auth-content {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 400px;
+            padding: 2rem;
+            position: relative;
+            text-align: center;
+        }
+
+        .google-signin-btn {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: white;
+            color: var(--dark);
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            min-height: 44px;
+        }
+
+        .google-signin-btn:hover {
+            background: #f8f9fa;
+            border-color: #ccc;
+        }
+
+        .auth-footer {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Category Navigation */
+        .category-nav {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            scrollbar-width: none;
+        }
+
+        .category-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-btn {
+            padding: 12px 24px;
+            background: white;
+            border: 2px solid transparent;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+            box-shadow: var(--shadow);
+        }
+
+        .category-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .category-btn:hover:not(.active) {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Categories Grid */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.05);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .category-image {
+            height: 200px;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-color: var(--light);
+        }
+
+        .category-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .category-card:hover .category-overlay {
+            opacity: 1;
+        }
+
+        .view-courses-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .view-courses-btn:hover {
+            background: var(--secondary);
+        }
+
+        .category-content {
+            padding: 1.5rem;
+        }
+
+        .category-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-icon {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .category-description {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .category-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Featured Courses Section */
+        .featured-courses {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title i {
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.05);
+            cursor: pointer;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .course-image {
+            height: 200px;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-color: var(--light);
+        }
+
+        .course-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .course-content {
+            padding: 1.5rem;
+        }
+
+        .course-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            line-height: 1.3;
+        }
+
+        .course-description {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .course-duration, .course-level {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .course-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .current-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .original-price {
+            color: var(--gray);
+            text-decoration: line-through;
+            font-size: 1rem;
+        }
+
+        .bestseller {
+            background: var(--highlight);
+            color: #593d00;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .add-to-cart-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .add-to-cart-btn:disabled {
+            background: var(--gray);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            z-index: 1001;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .search-bar {
+                display: none;
+            }
+
+            .header-actions .auth-buttons {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .page-header {
+                padding: 2rem 1rem;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .user-avatar {
+                width: 36px;
+                height: 36px;
+            }
+            
+            .mobile-menu {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header {
+                padding: 1.5rem 1rem;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header - Matching Homepage -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="https://i.postimg.cc/zv1G6fvB/Whats-App-Image-2025-11-18-at-16-22-32-removebg-preview.webp" alt="Hekima Hub Logo" class="logo-img">
+                <span>Hekima Hub</span>
+            </a>
+            
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="courses.html">Courses</a>
+                <a href="categories.html" class="active">Categories</a>
+                <a href="#">Instructors</a>
+                <a href="#">About</a>
+            </nav>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Search for anything" id="search-input">
+                <button id="search-button"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <div class="header-actions">
+                <div class="cart">
+                    <a href="#" class="cart-icon" id="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </a>
+                </div>
+                
+                <!-- Auth Buttons (shown when user is not logged in) -->
+                <div class="auth-buttons" id="auth-buttons">
+                    <button class="btn btn-primary" id="signin-btn">Sign In</button>
+                </div>
+                
+                <!-- User Menu (shown when user is logged in) -->
+                <div class="user-menu" id="user-menu">
+                    <img src="" alt="User Avatar" class="user-avatar" id="user-avatar">
+                    <div class="user-dropdown" id="user-dropdown">
+                        <div class="user-dropdown-info">
+                            <div class="user-dropdown-name" id="user-dropdown-name"></div>
+                            <div class="user-dropdown-email" id="user-dropdown-email"></div>
+                        </div>
+                        <button class="logout-btn" id="logout-btn">Logout</button>
+                    </div>
+                </div>
+                
+                <button class="menu-toggle" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-header">
+            <a href="index.html" class="logo">
+                <img src="https://i.postimg.cc/zv1G6fvB/Whats-App-Image-2025-11-18-at-16-22-32-removebg-preview.webp" alt="Hekima Hub Logo" class="logo-img">
+                <span>Hekima Hub</span>
+            </a>
+            <button class="close-menu" id="close-menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="mobile-nav-links">
+            <a href="index.html">Home</a>
+            <a href="courses.html">Courses</a>
+            <a href="categories.html" class="active">Categories</a>
+            <a href="#">Instructors</a>
+            <a href="#">About</a>
+            <a href="#" id="mobile-signin">Sign In</a>
+        </nav>
+    </div>
+
+    <!-- Auth Modal -->
+    <div class="auth-modal" id="auth-modal">
+        <div class="auth-content">
+            <h2 style="margin-bottom: 1.5rem;">Sign In to Hekima Hub</h2>
+            
+            <div id="google-signin-container">
+                <div class="google-signin-btn" id="google-signin-btn">
+                    <i class="fab fa-google"></i>
+                    <span id="google-btn-text">Continue with Google</span>
+                </div>
+            </div>
+            
+            <div class="auth-footer">
+                Sign in to add courses to your cart and access premium features
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">Browse Course Categories</h1>
+            <p class="page-subtitle">Explore our diverse range of learning categories to find the perfect course for you</p>
+        </div>
+
+        <!-- Category Navigation -->
+        <div class="category-nav">
+            <button class="category-btn active" data-category="all">All Categories</button>
+            <button class="category-btn" data-category="technology">Technology</button>
+            <button class="category-btn" data-category="business">Business</button>
+            <button class="category-btn" data-category="languages">Languages</button>
+            <button class="category-btn" data-category="music">Music</button>
+            <button class="category-btn" data-category="photography">Photography</button>
+            <button class="category-btn" data-category="health">Health & Fitness</button>
+            <button class="category-btn" data-category="finance">Finance</button>
+            <button class="category-btn" data-category="leadership">Leadership</button>
+        </div>
+
+        <!-- Categories Grid -->
+        <div class="categories-grid" id="categories-container">
+            <!-- Technology Category -->
+            <div class="category-card" data-category="technology">
+                <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')">
+                    <div class="category-overlay">
+                        <button class="view-courses-btn">View Courses</button>
+                    </div>
+                </div>
+                <div class="category-content">
+                    <h3 class="category-title">
+                        <i class="fas fa-laptop-code category-icon"></i>
+                        Technology
+                    </h3>
+                    <p class="category-description">
+                        Master programming, web development, data science, and other tech skills to advance your career in the digital age.
+                    </p>
+                    <div class="category-stats">
+                        <div class="stat">
+                            <i class="fas fa-book"></i>
+                            <span>42 Courses</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-users"></i>
+                            <span>25K+ Students</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Business Category -->
+            <div class="category-card" data-category="business">
+                <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')">
+                    <div class="category-overlay">
+                        <button class="view-courses-btn">View Courses</button>
+                    </div>
+                </div>
+                <div class="category-content">
+                    <h3 class="category-title">
+                        <i class="fas fa-chart-line category-icon"></i>
+                        Business
+                    </h3>
+                    <p class="category-description">
+                        Develop essential business skills in management, marketing, entrepreneurship, and strategy to drive success.
+                    </p>
+                    <div class="category-stats">
+                        <div class="stat">
+                            <i class="fas fa-book"></i>
+                            <span>38 Courses</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-users"></i>
+                            <span>18K+ Students</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Finance Category -->
+            <div class="category-card" data-category="finance">
+                <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')">
+                    <div class="category-overlay">
+                        <button class="view-courses-btn">View Courses</button>
+                    </div>
+                </div>
+                <div class="category-content">
+                    <h3 class="category-title">
+                        <i class="fas fa-chart-pie category-icon"></i>
+                        Finance
+                    </h3>
+                    <p class="category-description">
+                        Learn personal finance, investment strategies, accounting, and financial planning to secure your financial future.
+                    </p>
+                    <div class="category-stats">
+                        <div class="stat">
+                            <i class="fas fa-book"></i>
+                            <span>28 Courses</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-users"></i>
+                            <span>15K+ Students</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Languages Category -->
+            <div class="category-card" data-category="languages">
+                <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')">
+                    <div class="category-overlay">
+                        <button class="view-courses-btn">View Courses</button>
+                    </div>
+                </div>
+                <div class="category-content">
+                    <h3 class="category-title">
+                        <i class="fas fa-language category-icon"></i>
+                        Languages
+                    </h3>
+                    <p class="category-description">
+                        Master new languages with courses in English, Spanish, French, Mandarin, and more from expert instructors.
+                    </p>
+                    <div class="category-stats">
+                        <div class="stat">
+                            <i class="fas fa-book"></i>
+                            <span>35 Courses</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-users"></i>
+                            <span>22K+ Students</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Music Category -->
+            <div class="category-card" data-category="music">
+                <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')">
+                    <div class="category-overlay">
+                        <button class="view-courses-btn">View Courses</button>
+                    </div>
+                </div>
+                <div class="category-content">
+                    <h3 class="category-title">
+                        <i class="fas fa-music category-icon"></i>
+                        Music
+                    </h3>
+                    <p class="category-description">
+                        Learn to play instruments, music theory, production, and composition from professional musicians and producers.
+                    </p>
+                    <div class="category-stats">
+                        <div class="stat">
+                            <i class="fas fa-book"></i>
+                            <span>24 Courses</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-users"></i>
+                            <span>12K+ Students</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photography Category -->
+            <div class="category-card" data-category="photography">
+                <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1542038784456-1ea8e935640e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')">
+                    <div class="category-overlay">
+                        <button class="view-courses-btn">View Courses</button>
+                    </div>
+                </div>
+                <div class="category-content">
+                    <h3 class="category-title">
+                        <i class="fas fa-camera category-icon"></i>
+                        Photography
+                    </h3>
+                    <p class="category-description">
+                        Master photography techniques, editing, composition, and lighting to capture stunning images.
+                    </p>
+                    <div class="category-stats">
+                        <div class="stat">
+                            <i class="fas fa-book"></i>
+                            <span>19 Courses</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-users"></i>
+                            <span>14K+ Students</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Health & Fitness Category -->
+            <div class="category-card" data-category="health">
+                <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')">
+                    <div class="category-overlay">
+                        <button class="view-courses-btn">View Courses</button>
+                    </div>
+                </div>
+                <div class="category-content">
+                    <h3 class="category-title">
+                        <i class="fas fa-heartbeat category-icon"></i>
+                        Health & Fitness
+                    </h3>
+                    <p class="category-description">
+                        Improve your physical and mental wellbeing with courses on nutrition, exercise, yoga, and wellness.
+                    </p>
+                    <div class="category-stats">
+                        <div class="stat">
+                            <i class="fas fa-book"></i>
+                            <span>31 Courses</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-users"></i>
+                            <span>20K+ Students</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leadership Category -->
+            <div class="category-card" data-category="leadership">
+                <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')">
+                    <div class="category-overlay">
+                        <button class="view-courses-btn">View Courses</button>
+                    </div>
+                </div>
+                <div class="category-content">
+                    <h3 class="category-title">
+                        <i class="fas fa-users-cog category-icon"></i>
+                        Leadership
+                    </h3>
+                    <p class="category-description">
+                        Develop leadership skills, team management, communication, and strategic thinking to advance your career.
+                    </p>
+                    <div class="category-stats">
+                        <div class="stat">
+                            <i class="fas fa-book"></i>
+                            <span>26 Courses</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-users"></i>
+                            <span>16K+ Students</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Courses Section -->
+        <div class="featured-courses">
+            <h2 class="section-title">
+                <i class="fas fa-star"></i>
+                Popular Courses
+            </h2>
+            <div class="courses-grid">
+                <!-- Data Entry Course -->
+                <div class="course-card" data-course="data-entry">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')">
+                        <div class="course-badge">Bestseller</div>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Data Entry Mastery</h3>
+                        <p class="course-description">Master accurate and efficient data entry with essential skills for data management and productivity techniques.</p>
+                        <div class="course-meta">
+                            <span class="course-duration"><i class="far fa-clock"></i> 4 weeks</span>
+                            <span class="course-level"><i class="fas fa-signal"></i> Beginner</span>
+                        </div>
+                        <div class="course-price">
+                            <span class="current-price">$27.99</span>
+                            <span class="original-price">$79.99</span>
+                            <span class="bestseller">Bestseller</span>
+                        </div>
+                        <button class="add-to-cart-btn" data-course="data-entry">
+                            <i class="fas fa-cart-plus"></i>
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Personal Finance Course -->
+                <div class="course-card" data-course="personal-finance">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')">
+                        <div class="course-badge">Bestseller</div>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Personal Finance Management</h3>
+                        <p class="course-description">Take control of your financial future with budgeting, investing, and wealth-building strategies.</p>
+                        <div class="course-meta">
+                            <span class="course-duration"><i class="far fa-clock"></i> 6 weeks</span>
+                            <span class="course-level"><i class="fas fa-signal"></i> All Levels</span>
+                        </div>
+                        <div class="course-price">
+                            <span class="current-price">$69.99</span>
+                            <span class="original-price">$99.99</span>
+                            <span class="bestseller">Bestseller</span>
+                        </div>
+                        <button class="add-to-cart-btn" data-course="personal-finance">
+                            <i class="fas fa-cart-plus"></i>
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Graphic Design Course -->
+                <div class="course-card" data-course="graphic-design">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')">
+                        <div class="course-badge">New</div>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Graphic Design & Graphic Arts</h3>
+                        <p class="course-description">Unleash your creativity with design principles, color theory, and industry-standard tools.</p>
+                        <div class="course-meta">
+                            <span class="course-duration"><i class="far fa-clock"></i> 8 weeks</span>
+                            <span class="course-level"><i class="fas fa-signal"></i> Beginner</span>
+                        </div>
+                        <div class="course-price">
+                            <span class="current-price">$59.99</span>
+                            <span class="original-price">$119.99</span>
+                        </div>
+                        <button class="add-to-cart-btn" data-course="graphic-design">
+                            <i class="fas fa-cart-plus"></i>
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message">Item added to cart!</span>
+    </div>
+
+    <script>
+        // Replace with your actual Google Client ID
+        const GOOGLE_CLIENT_ID = '230366555128-bkm4jhc3c14scafm8808uk8u456u6cfk.apps.googleusercontent.com';
+
+        // Course data with detailed information
+        const courses = {
+            'data-entry': {
+                title: 'Data Entry Mastery',
+                price: 27.99,
+                originalPrice: 79.99,
+                duration: '4 weeks',
+                students: '12,500+ students',
+                level: 'Beginner',
+                image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+                description: 'Master the art of accurate and efficient data entry with this comprehensive course. Learn essential skills for data management, keyboard shortcuts, and productivity techniques that will make you a valuable asset in any organization.',
+                objectives: [
+                    'Understand data entry fundamentals and best practices',
+                    'Master keyboard shortcuts for increased productivity',
+                    'Learn data validation and error checking techniques',
+                    'Develop skills in spreadsheet software like Excel',
+                    'Improve typing speed and accuracy',
+                    'Understand data security and confidentiality'
+                ],
+                category: 'technology'
+            },
+            'personal-finance': {
+                title: 'Personal Finance Management',
+                price: 69.99,
+                originalPrice: 99.99,
+                duration: '6 weeks',
+                students: '15,800+ students',
+                level: 'All Levels',
+                image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+                description: 'Take control of your financial future with this comprehensive personal finance course. Learn budgeting, investing, debt management, and wealth-building strategies.',
+                objectives: [
+                    'Create and maintain a personal budget',
+                    'Understand different investment options',
+                    'Develop a debt repayment strategy',
+                    'Plan for retirement and financial independence',
+                    'Learn tax optimization strategies',
+                    'Build an emergency fund and insurance portfolio'
+                ],
+                category: 'finance'
+            },
+            'graphic-design': {
+                title: 'Graphic Design & Graphic Arts',
+                price: 59.99,
+                originalPrice: 119.99,
+                duration: '8 weeks',
+                students: '6,500+ students',
+                level: 'Beginner',
+                image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+                description: 'Unleash your creativity with this comprehensive graphic design course. Learn design principles, color theory, typography, and how to use industry-standard tools.',
+                objectives: [
+                    'Master design principles and composition',
+                    'Understand color theory and psychology',
+                    'Learn typography fundamentals',
+                    'Create logos, brochures, and digital graphics',
+                    'Develop skills in Adobe Creative Suite',
+                    'Build a professional design portfolio'
+                ],
+                category: 'technology'
+            }
+        };
+
+        // User state
+        let currentUser = null;
+        let googleInitialized = false;
+        let cart = [];
+
+        // DOM Elements
+        const authModal = document.getElementById('auth-modal');
+        const signinBtn = document.getElementById('signin-btn');
+        const authButtons = document.getElementById('auth-buttons');
+        const userMenu = document.getElementById('user-menu');
+        const userAvatar = document.getElementById('user-avatar');
+        const userDropdown = document.getElementById('user-dropdown');
+        const userDropdownName = document.getElementById('user-dropdown-name');
+        const userDropdownEmail = document.getElementById('user-dropdown-email');
+        const logoutBtn = document.getElementById('logout-btn');
+        const googleSigninBtn = document.getElementById('google-signin-btn');
+        const googleBtnText = document.getElementById('google-btn-text');
+        const cartIcon = document.getElementById('cart-icon');
+        const cartCount = document.getElementById('cart-count');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const categoryCards = document.querySelectorAll('.category-card');
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenu = document.getElementById('close-menu');
+        const mobileSignin = document.getElementById('mobile-signin');
+        const viewCourseBtns = document.querySelectorAll('.view-courses-btn');
+        const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
+
+        // Initialize Google Sign-In
+        function initializeGoogleSignIn() {
+            if (typeof google === 'undefined') {
+                console.warn('Google Identity Services not loaded yet, retrying...');
+                setTimeout(initializeGoogleSignIn, 500);
+                return;
+            }
+
+            try {
+                google.accounts.id.initialize({
+                    client_id: GOOGLE_CLIENT_ID,
+                    callback: handleGoogleSignIn,
+                    error_callback: handleGoogleSignInError,
+                    ux_mode: 'popup',
+                    auto_select: false
+                });
+
+                google.accounts.id.renderButton(
+                    document.getElementById('google-signin-container'),
+                    { 
+                        theme: "outline", 
+                        size: "large", 
+                        width: "100%",
+                        text: "continue_with",
+                        shape: "rectangular"
+                    }
+                );
+
+                googleInitialized = true;
+                console.log('Google Sign-In initialized successfully');
+
+            } catch (error) {
+                console.error('Error initializing Google Sign-In:', error);
+                setupFallbackGoogleButton();
+            }
+        }
+
+        function setupFallbackGoogleButton() {
+            googleSigninBtn.innerHTML = '<i class="fab fa-google"></i> Continue with Google';
+            googleSigninBtn.onclick = () => {
+                showToast('Google Sign-In is temporarily unavailable. Please try again later.');
+            };
+            googleSigninBtn.style.opacity = '0.7';
+        }
+
+        // Handle Google Sign-In
+        function handleGoogleSignIn(response) {
+            console.log('Google Sign-In response received');
+            
+            try {
+                const userInfo = parseJwt(response.credential);
+                
+                if (!userInfo) {
+                    throw new Error('Invalid token response');
+                }
+                
+                currentUser = {
+                    id: userInfo.sub,
+                    name: userInfo.name,
+                    email: userInfo.email,
+                    picture: userInfo.picture,
+                    provider: 'google'
+                };
+
+                updateUserInterface();
+                authModal.style.display = 'none';
+                showToast(`Welcome to Hekima Hub, ${userInfo.name}!`);
+                
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                localStorage.setItem('userCart', JSON.stringify(cart));
+                
+            } catch (error) {
+                console.error('Error handling Google Sign-In:', error);
+                showToast('Error signing in. Please try again.');
+            }
+        }
+
+        function handleGoogleSignInError(error) {
+            console.error('Google Sign-In error:', error);
+            showToast('Error with Google Sign-In. Please try again.');
+        }
+
+        // Parse JWT token
+        function parseJwt(token) {
+            try {
+                const base64Url = token.split('.')[1];
+                const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
+
+                return JSON.parse(jsonPayload);
+            } catch (e) {
+                console.error('Error parsing JWT:', e);
+                return null;
+            }
+        }
+
+        // Update UI based on authentication state
+        function updateUserInterface() {
+            if (currentUser) {
+                authButtons.style.display = 'none';
+                userMenu.style.display = 'flex';
+                
+                userAvatar.src = currentUser.picture;
+                userDropdownName.textContent = currentUser.name;
+                userDropdownEmail.textContent = currentUser.email;
+            } else {
+                authButtons.style.display = 'flex';
+                userMenu.style.display = 'none';
+            }
+            updateCartDisplay();
+        }
+
+        // Cart functionality
+        function addToCart(courseId) {
+            if (!currentUser) {
+                showToast('Please sign in to add courses to your cart.');
+                authModal.style.display = 'flex';
+                return;
+            }
+
+            const course = courses[courseId];
+            const existingItem = cart.find(item => item.id === courseId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: courseId,
+                    title: course.title,
+                    price: course.price,
+                    quantity: 1
+                });
+            }
+            
+            updateCartDisplay();
+            showToast(`${course.title} added to cart!`);
+            
+            // Save to localStorage
+            localStorage.setItem('userCart', JSON.stringify(cart));
+        }
+
+        function updateCartDisplay() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+        }
+
+        // Show toast notification
+        function showToast(message) {
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Category filtering
+        function filterCategories(category) {
+            categoryCards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Event Listeners
+        signinBtn.addEventListener('click', () => {
+            authModal.style.display = 'flex';
+            if (!googleInitialized) {
+                setTimeout(initializeGoogleSignIn, 100);
+            }
+        });
+
+        mobileSignin.addEventListener('click', (e) => {
+            e.preventDefault();
+            mobileMenu.classList.remove('active');
+            authModal.style.display = 'flex';
+            if (!googleInitialized) {
+                setTimeout(initializeGoogleSignIn, 100);
+            }
+        });
+
+        authModal.addEventListener('click', (e) => {
+            if (e.target === authModal) {
+                authModal.style.display = 'none';
+            }
+        });
+
+        userAvatar.addEventListener('click', () => {
+            userDropdown.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!userMenu.contains(e.target)) {
+                userDropdown.classList.remove('active');
+            }
+        });
+
+        logoutBtn.addEventListener('click', () => {
+            currentUser = null;
+            cart = [];
+            updateUserInterface();
+            showToast('You have been logged out successfully.');
+            
+            localStorage.removeItem('currentUser');
+            localStorage.removeItem('userCart');
+            
+            if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
+                google.accounts.id.disableAutoSelect();
+            }
+        });
+
+        // Category buttons
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                filterCategories(btn.dataset.category);
+            });
+        });
+
+        // View courses buttons
+        viewCourseBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const categoryCard = this.closest('.category-card');
+                const category = categoryCard.dataset.category;
+                
+                // Navigate to courses page with category filter
+                window.location.href = `courses.html?category=${category}`;
+            });
+        });
+
+        // Add to cart buttons
+        addToCartBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const courseId = this.dataset.course;
+                addToCart(courseId);
+            });
+        });
+
+        // Mobile menu functionality
+        menuToggle.addEventListener('click', function() {
+            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeMenu.addEventListener('click', function() {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+            if (link.id !== 'mobile-signin') {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            }
+        });
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM loaded, initializing application...');
+            
+            // Check for saved user and cart
+            const savedUser = localStorage.getItem('currentUser');
+            const savedCart = localStorage.getItem('userCart');
+            
+            if (savedUser) {
+                try {
+                    currentUser = JSON.parse(savedUser);
+                    console.log('Found saved user:', currentUser);
+                } catch (e) {
+                    console.error('Error parsing saved user:', e);
+                    localStorage.removeItem('currentUser');
+                }
+            }
+            
+            if (savedCart) {
+                try {
+                    cart = JSON.parse(savedCart);
+                    console.log('Found saved cart:', cart);
+                } catch (e) {
+                    console.error('Error parsing saved cart:', e);
+                    localStorage.removeItem('userCart');
+                }
+            }
+            
+            updateUserInterface();
+            setTimeout(initializeGoogleSignIn, 1000);
+        });
+
+        window.addEventListener('load', () => {
+            console.log('Window fully loaded');
+            if (!googleInitialized) {
+                initializeGoogleSignIn();
+            }
+        });
+    </script>
+</body>
+</html>
